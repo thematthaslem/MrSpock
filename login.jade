@@ -1,0 +1,28 @@
+//output: login.php
+include _includes/issession.php
+html
+head
+  title The Matt Haslem
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts 
+body
+  .all-content.login
+    
+    .content-wrap
+      .logo-wrap
+        a(href="index.php")   
+          img(src="_pics/logo.png" alt="Mr. Spock Logo")
+      include _includes/errors.php
+      .form-wrap
+        include _includes/forms/login.php  
+        //form.column(method="POST" action="login_action.php")
+          input(type="text" name="email" placeholder="e-mail")
+          input(type="password" name="pass" placeholder="password")
+          
+          .bottom-row
+            button(type="submit")
+              | Login
+            a.plain(href="forgotpass.php") Forgot Password?
+        
+
+        

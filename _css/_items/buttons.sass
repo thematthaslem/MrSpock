@@ -1,0 +1,33 @@
+a.button
+  border-radius: 6px
+  padding: 10px 25px
+  text-decoration: none
+
+  &.light
+    background: $primary-lighter
+    color: $primary
+
+    &:hover
+      background: $primary-light
+
+  &.outline
+    border: solid 3px $primary-lighter
+    padding: 7px 25px
+    color: $primary-lighter
+
+    &:hover
+      border-color: $primary-light
+      color: $primary-light
+
+  &.dropdown
+    border-radius: 50px
+
+    background-color: rgba(30,30,30,1)
+    padding: 10px
+
+    &:hover
+      background-color: rgba(60,60,60,1)
+
+    img
+      width: 10px
+      height: 10px

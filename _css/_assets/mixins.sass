@@ -1,0 +1,17 @@
+@mixin flex($dir,$align,$just,$wrap)
+  display: flex
+  flex-direction: $dir
+  align-items: $align
+  justify-content: $just
+  flex-wrap: $wrap
+
+@mixin transition($time)
+  transition: all $time ease-in-out
+
+@mixin grid($column-gap, $row-gap)
+  display: grid
+  grid-gap: $column-gap $row-gap
+
+@mixin fullscreen()
+  width: 100vw
+  height: 100vh

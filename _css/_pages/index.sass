@@ -1,0 +1,82 @@
+.all-content.index
+  @include fullscreen()
+  @include flex(column, center, center, nowrap)
+  background-color: $primary
+  background-image: url('_pics/enterprise.svg')
+  background-repeat: no-repeat
+  background-size: auto 40vh
+  background-position: 150px 50vh
+
+  position: relative
+
+  .user-info-wrap
+    @include flex(column, flex-end, flex-start, nowrap)
+    position: absolute
+    top: 40px
+    right: 40px
+
+    .user-info
+      @include flex(row, center, flex-start,nowrap)
+      color: $primary-light
+      margin-bottom: 12px
+
+      img.user-pic
+        width: 40px
+        height: auto
+
+      *:not(:last-child)
+        margin-right: 15px
+
+    .user-options-wrap
+      @include flex(column, flex-start, flex-start, nowrap)
+      background: $primary-light-accent
+      padding: 12px
+      border-radius: 12px
+
+      a
+        width: 100px
+        text-align: right
+        padding: 10px
+        color: $primary-lighter
+        border-radius: 6px
+
+        &:hover
+          background-color: $primary-light
+
+
+
+  .content-wrap
+    @include flex(column, center, center, nowrap)
+
+    & > *:not(:last-child)
+      margin-bottom: 20px
+
+
+    .logo-wrap
+      margin-bottom: 35px
+      img
+        width: 160px
+        height: auto
+
+
+    .search-wrap
+      form
+        @include flex(row, center, center, nowrap)
+        input[type="text"]
+          width: 400px
+          max-width: 80vw
+          padding: 20px
+          margin-right: 15px
+          border-radius: 12px
+
+        button
+          cursor: pointer
+          padding: 21px
+
+          img
+            width: 13px
+            height: 13px
+
+    .login-register-buttons-wrap
+      a:not(:last-child)
+        margin-right: 15px

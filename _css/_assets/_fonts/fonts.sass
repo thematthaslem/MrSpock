@@ -1,0 +1,49 @@
+@font-face
+  font-family: thrasher
+  src: url(_fonts/thrasher.ttf)
+@font-face
+  font-family: fliped
+  src: url(_fonts/fliped.otf)
+
+$thrash: thrasher, "europa", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif"
+$fliped: fliped, "europa", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif"
+
+.txt-thrash
+  font-family: $thrash !important
+.txt-fliped
+  font-family: $fliped !important
+
+body, a
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif
+  font-size: 13px
+  font-weight: bold
+
+a.plain
+  color: $primary-lighter
+  text-decoration: underline
+
+  &:hover
+    color: $primary-light
+
+  &.dark
+    color: $primary-light-accent
+
+    &:hover
+      color: $primary-light
+
+h1
+  font-size: 24px
+  margin-bottom: 12px
+  color: $primary
+h2
+  font-size: 18px
+  margin-bottom: 12px
+  color: $primary
+
+p
+  color: $primary-lighter
+  margin-bottom: 20px
+  max-width: fit-content
+
+.txt-light
+  color: $primary-lighter

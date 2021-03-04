@@ -1,0 +1,41 @@
+//output: editinfo.php
+include _includes/issession.php
+html
+head
+  title The Matt Haslem
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts  
+body
+  .all-content.edit-info
+    .left-bar
+      .logo-wrap 
+        img(src="_pics/logo.png" alt="Mr. Spock Logo")   
+      .nav-wrap
+        .nav-links
+          a(href="index.php") Home 
+          a(href="_php/logout.php") Logout 
+    .content-wrap
+      .messages-wrap
+        include _includes/errors.php
+        include _includes/success.php
+      h1 personal information 
+      br
+      .form-wrap
+        include _includes/forms/editinfo.php   
+        //form.column(method="POST" action="editinfo_action.php")
+          input(type="text" name="fname" placeholder="first name")
+          input(type="text" name="lname" placeholder="last name")
+          input(type="text" name="email" placeholder="e-mail")
+          button.dark(type="submit")
+            | Save Changes
+      br
+      h1 change password
+      .form-wrap
+        form.column(method="POST" action="_php/changepass_action.php")
+          input(type="password" name="oldpass" placeholder="old password" required)
+          input(type="password" name="pass1" placeholder="new password" required)
+          input(type="password" name="pass2" placeholder="re-enter new password" required)
+          button.dark(type="submit")
+            | Save Changes
+
+        

@@ -1,0 +1,44 @@
+.all-content.edit-info
+  @include fullscreen()
+  @include flex(row, stretch, center, nowrap)
+  position: relative
+
+
+  .left-bar
+    @include flex(column, flex-start, center, nowrap)
+    flex: 1
+    background-color: $primary
+    padding-left: 50px
+
+    .logo-wrap
+      margin-bottom: 20px
+      img
+        width: min(150px, 70%)
+        height: auto
+
+    .nav-wrap
+      .nav-links
+        @include flex(column, flex-start, flex-start, nowrap)
+        a
+          padding: 10px
+          color: $primary-lighter
+          border-radius: 6px
+
+          &:hover
+            background-color: $primary-light
+
+  .content-wrap
+    @include flex(column, flex-start, center, nowrap)
+    flex: 4
+    background-color: $primary-lighter
+    padding-left: 200px
+
+    .messages-wrap
+      max-width: 400px
+      width: 400px
+      margin-bottom: 30px
+
+    .form-wrap
+      form
+        input[type="text"], input[type="password"], input[type="email"]
+          width: 250px

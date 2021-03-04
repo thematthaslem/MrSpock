@@ -1,0 +1,28 @@
+//output: forgotpass.php
+html
+head
+  title The Matt Haslem
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts 
+body
+  .all-content.login
+    
+    .content-wrap
+      .logo-wrap
+        a(href="index.php")
+          img(src="_pics/logo.png" alt="Mr. Spock Logo")
+      .form-wrap
+        h1.txt-light
+          | Forgot your Password?
+        p
+          | Don't worry. Enter your e-mail down below and we'll send you a link to reset your password.
+        br
+          
+        form.column(method="POST" action="forgotpass_action.php")
+          input(type="text" name="email" placeholder="e-mail")
+          button(type="submit")
+            | Send
+
+        
+
+        

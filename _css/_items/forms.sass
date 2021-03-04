@@ -1,0 +1,49 @@
+input[type="text"], input[type="password"], input[type="email"]
+  outline: none
+  padding: 12px
+  border-radius: 6px
+  border: none
+
+form
+  &.column
+    @include flex(column, flex-start, flex-start, nowrap)
+
+    & > *:not(:last-child)
+      margin-bottom: 15px
+
+    & > input:last-child
+      margin-bottom: 30px
+
+
+    .bottom-row
+      @include flex(row, center, space-between, nowrap)
+      width: 100%
+
+      a
+        text-align: right
+        width: 100%
+
+  button
+    cursor: pointer
+    padding: 10px 25px
+    font-weight: bold
+
+    background-color: $primary-lighter
+    //background-image: url('_pics/search_arrow.svg')
+    //background-repeat: no-repeat
+    //background-position: center center
+    //background-size: 12px
+
+    outline: none
+    border: none
+    border-radius: 6px
+
+    &:hover
+      background-color: $primary-light
+
+    &.dark
+      background-color: $primary-light-accent
+      color: $white
+
+      &:hover
+        background-color: $primary-light

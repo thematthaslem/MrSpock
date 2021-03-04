@@ -1,0 +1,36 @@
+//output: index.php
+include _includes/issession.php
+html
+head
+  title The Matt Haslem
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts 
+body
+  .all-content.index
+    include _includes/pages/index/user-info.php
+    //.user-info-wrap
+      .user-info
+        img(class="user-pic" src="_pics/user.png")
+        span.username TheMattHaslem
+        a.button.dropdown
+          img(src="_pics/drop_arrow.svg" alt="dropdown arrow")
+      .user-options-wrap
+        a(href="editinfo.php") Edit Info
+        a(href="logout.php") Logout
+    
+    .content-wrap
+      .logo-wrap
+        img(src="_pics/logo.png" alt="Mr. Spock Logo")
+      .search-wrap
+        form(method="GET" action="results.php")
+          input(type="text" name="search" placeholder="Explore new articles...")
+          button(type="submit")
+            img(src="_pics/search_arrow.svg" alt="search arrow")
+      include _includes/pages/index/login-buttons.php
+      //.login-register-buttons-wrap
+        a.button.light(href="login.php") Login
+        a.button.outline(href="register.php") Sign Up  
+         
+  
+ 
+ 

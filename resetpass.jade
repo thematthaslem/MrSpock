@@ -1,0 +1,21 @@
+//output: resetpass.php
+html
+head
+  title The Matt Haslem
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts 
+body
+  .all-content.login
+    
+    .content-wrap
+      .logo-wrap
+        a(href="index.php")
+          img(src="_pics/logo.png" alt="Mr. Spock Logo")
+      .form-wrap
+        form.column(method="POST" action="resetpass_action.php")
+          input(type="password" name="pass1" placeholder="password")
+          input(type="password" name="pass1" placeholder="re-enter password")
+          button(type="submit")
+            | Reset Pass
+
+        

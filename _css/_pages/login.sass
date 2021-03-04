@@ -1,0 +1,33 @@
+.all-content.login
+  @include fullscreen()
+  @include flex(column, center, center, nowrap)
+  background-color: $primary
+  background-image: url('_pics/enterprise.svg')
+  background-repeat: no-repeat
+  background-size: auto 40vh
+  background-position: 150px 50vh
+
+  position: relative
+
+
+  .content-wrap
+    @include flex(column, center, center, nowrap)
+
+    & > *:not(:last-child)
+      margin-bottom: 20px
+
+
+    .logo-wrap
+      margin-bottom: 35px
+      img
+        width: 160px
+        height: auto
+
+
+    .form-wrap
+      form
+
+        input[type="text"], input[type="password"], input[type="email"] 
+          width: 300px
+          max-width: 80vw
+          padding: 10px
