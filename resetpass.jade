@@ -1,4 +1,5 @@
 //output: resetpass.php
+include _includes/issession.php
 html
 head
   title The Matt Haslem
@@ -12,8 +13,10 @@ body
         a(href="index.php")
           img(src="_pics/logo.png" alt="Mr. Spock Logo")
       .form-wrap
-        form.column(method="POST" action="resetpass_action.php")
-          input(type="password" name="pass1" placeholder="password")
+        include _includes/errors.php
+        include _includes/forms/resetpass.php 
+        //form.column(method="POST" action="_php/resetpass_action.php")
+          input(type="password" name="pass1" placeholder="password") 
           input(type="password" name="pass1" placeholder="re-enter password")
           button(type="submit")
             | Reset Pass

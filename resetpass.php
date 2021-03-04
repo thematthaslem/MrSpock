@@ -1,3 +1,12 @@
+<?php
+  /*if(!isset($_SESSION))
+  {
+    session_start();
+  }*/
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <html></html>
 <head>
@@ -13,12 +22,50 @@
   <div class="all-content login">
     <div class="content-wrap">
       <div class="logo-wrap"><a href="index.php"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></a></div>
-      <div class="form-wrap">
-        <form method="POST" action="resetpass_action.php" class="column">
-          <input type="password" name="pass1" placeholder="password"/>
-          <input type="password" name="pass1" placeholder="re-enter password"/>
-          <button type="submit">Reset Pass</button>
-        </form>
+      <div class="form-wrap"><?php
+  // If there are errors in the session
+  // -> Print errors in a box
+  // -> unset session
+  if( isset($_SESSION['error']) )
+  {
+    $err_arr = $_SESSION['error'];
+
+    if( isset($_SESSION['email']) )
+    {
+      $email = $_SESSION['email'];
+    }
+
+?>
+  <div class="error-wrap">
+    <?php
+      foreach ($err_arr as $key => $value) {
+        echo "
+          <p class=\"error\">
+            ". $value . "
+          </p>
+        ";
+      }
+     ?>
+  </div>
+
+<?php
+    // Unset the SESSION
+    unset($_SESSION['error']);
+  }
+?>
+<form method="POST" action="_php/resetpass_action.php" class="column">
+  <input type="password" name="pass1" placeholder="password" required/>
+  <input type="password" name="pass2" placeholder="re-enter password" required/>
+  <input type="hidden" name="token" value="<?php echo $_GET['token']; ?>" >
+  <button type="submit">Reset Pass</button>
+</form>
+
+        <!--form.column(method="POST" action="_php/resetpass_action.php")
+        input(type="password" name="pass1" placeholder="password") 
+        input(type="password" name="pass1" placeholder="re-enter password")
+        button(type="submit")
+          | Reset Pass
+        -->
       </div>
     </div>
   </div>
