@@ -1,4 +1,4 @@
-//output: successpage.php
+//output: confirm_email.php
 include _includes/issession.php
 html
 head
@@ -12,9 +12,12 @@ body
       .logo-wrap  
         a(href="index.php") 
           img(src="_pics/logo.png" alt="Mr. Spock Logo") 
-      include _includes/success.php   
-      a.button.light(href="index.php") Go Back
+      .success-wrap
+        p.success
+          include _includes/confirm_email.php   
+      a.button.light(href="login.php") Login
         
 
         
  
+  

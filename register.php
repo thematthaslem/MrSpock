@@ -1,13 +1,16 @@
 <?php
-  if(!isset($_SESSION))
+  /*if(!isset($_SESSION))
   {
     session_start();
-  }
+  }*/
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <html> </html>
 <head>
-  <title>The Matt Haslem</title>
+  <title>Mr. Spock</title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -25,7 +28,12 @@
   if( isset($_SESSION['error']) )
   {
     $err_arr = $_SESSION['error'];
-    $email = $_SESSION['email'];
+
+    if( isset($_SESSION['email']) )
+    {
+      $email = $_SESSION['email'];
+    }
+
 ?>
   <div class="error-wrap">
     <?php

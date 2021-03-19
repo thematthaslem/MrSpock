@@ -10,6 +10,13 @@
 
   // Check if email is actually in there
   $user_get = get_user_from_email($email);
+
+  // Check if email is confirmed
+  if( $user_get[0]['confirm_email'] != "confirmed" )
+  {
+    $err_arr[] = "That email has not been confirmed!";
+  }
+
   print_r($user_get);
 
   if( empty($user_get) )

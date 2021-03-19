@@ -1,13 +1,16 @@
 <?php
-  if(!isset($_SESSION))
+  /*if(!isset($_SESSION))
   {
     session_start();
-  }
+  }*/
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <html></html>
 <head>
-  <title>The Matt Haslem</title>
+  <title>Mr. Spock</title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -15,8 +18,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="_jquery/jq.js"></script>
 </head>
-<body>
+<body> 
   <div class="all-content index"><?php
+  require('_php/connect.php');
   require('_php/functions_get.php');
   $loggedin = false;
   if( check_logged_in() )

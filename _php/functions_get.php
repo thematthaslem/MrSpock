@@ -1,4 +1,5 @@
 <?php
+
   function get_user_from_email($email)
   {
     $conn = db_connect();
@@ -11,11 +12,18 @@
     return $arr;
   }
 
+  // If user is logged in AND the email is confirmed, return true
   function check_logged_in()
   {
     if( isset($_SESSION['user']) )
     {
-      return true;
+
+      $userinfo = get_user_from_email($_SESSION['user']);
+      if( $userinfo[0]['confirm_email'] == 'confirmed' )
+      {
+        return true;
+      }
+
     }
     else
     {

@@ -26,26 +26,51 @@
   // IF EVERYTHING IS ALL GOOD
   if ( empty($error_arr) )
   {
-    // send email
-    $msg = "Thanks for signing up to Mr. Spock!";
-    $subject = "Mr. Spock Account confirmation";
-
-    mail($email,$subject,$msg);
 
     // Secure password
     $securepass = password_hash($pass1, PASSWORD_DEFAULT);
 
+    // Generate token for email verification
+    $token = md5(uniqid(rand(), true));
+
     // Update database
     $conn = db_connect();
-    $data = $conn->prepare("INSERT INTO users (email, pass) VALUES (:email, :pass)");
+    $data = $conn->prepare("INSERT INTO users (email, pass, confirm_email) VALUES (:email, :pass, :token)");
     $data->bindparam(':email', $email);
     $data->bindparam(':pass', $securepass);
+    $data->bindparam(':token', $token);
 
     if($data->execute())
     {
-      $_SESSION['success'] = "Direct hit, Captain. Your account is setup. An email has been sent to " . $email . " to verify.";
-      $_SESSION['user'] = $email;
-      header('Location: ../successpage.php');
+
+
+      // send email
+      // E-mail contains a link that links to 'confirm_email' with GET values for token (token -> confirm_email token)
+      $msg = "Thanks for signing up to Mr. Spock! <a href=\"http://localhost/_school/cs418/git/haslem-project/confirm_email.php?token=$token\">Click here to verify e-mail</a>";
+      $subject = "Mr. Spock Account confirmation";
+      $headers = "MIME-Version: 1.0" . "\r\n";
+      $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+      $headers .= "From: Mr. Spock";
+      // If confirmation e-mail is sent
+      if(mail($email,$subject,$msg, $headers))
+      {
+
+        $_SESSION['success'] = "Direct hit, Captain. Before we get started, you need to verify your e-mail.
+        An email has been sent to " . $email . " to verify.";
+        /*
+          NOTE: Don't need to sign them in automattically since they haven't confirmed their email yet
+
+        $_SESSION['user'] = $email;
+        */
+        header('Location: ../successpage.php');
+
+
+      }
+      else
+      {
+        $error_arr[] = "Sorry, Captain. An error occured with sending an e-mail.";
+      }
+
     }
     else
     {

@@ -1,4 +1,5 @@
 <?php
+  require('_php/connect.php');
   require('_php/functions_get.php');
   $loggedin = false;
   if( check_logged_in() )

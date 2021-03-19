@@ -400,6 +400,7 @@ a.button.dropdown img {
   width: 100%;
   background-color: #4efacd;
   border-radius: 12px;
+  min-width: 300px;
 }
 .success-wrap p.success {
   color: white;
