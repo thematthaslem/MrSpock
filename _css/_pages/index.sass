@@ -59,24 +59,57 @@
         height: auto
 
 
-    .search-wrap
-      form
-        @include flex(row, center, center, nowrap)
-        input[type="text"]
-          width: 400px
-          max-width: 80vw
-          padding: 20px
-          margin-right: 15px
-          border-radius: 12px
-
-        button
-          cursor: pointer
-          padding: 21px
-
-          img
-            width: 13px
-            height: 13px
-
     .login-register-buttons-wrap
       a:not(:last-child)
         margin-right: 15px
+
+
+.search-wrap-all
+  form
+    input[type="text"]
+      width: 400px
+      max-width: 80vw
+      padding: 20px
+      margin-right: 15px
+      border-radius: 12px
+
+    button
+      cursor: pointer
+      padding: 21px
+
+      img
+        width: 13px
+        height: 13px
+
+  .search-wrap
+    @include flex(row, center, center, nowrap)
+
+  .advanced-search-wrap
+    width: 470px
+
+
+    .link
+      margin: 15px 0
+
+    .advanced-search-items
+      @include transition(300ms)
+      max-height: 0px
+      padding: 0px
+      background: $primary-light
+      border: solid 0px $primary-light-accent
+      overflow: hidden
+      color: $primary
+
+      & > input
+        margin-top: 8px
+      & > input:not(:last-child)
+        margin-bottom: 14px
+
+      &.open
+        max-height: 100%
+        padding: 25px 
+        border-width: 6px
+
+      input[type="text"]
+        padding: 5px
+        border-radius: 5px

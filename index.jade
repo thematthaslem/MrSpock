@@ -21,15 +21,27 @@ body
     .content-wrap
       .logo-wrap
         img(src="_pics/logo.png" alt="Mr. Spock Logo")
-      .search-wrap
+      
+      .search-wrap-all
         form(method="GET" action="results.php")
-          input(type="text" name="search" placeholder="Explore new articles...")
-          button(type="submit")
-            img(src="_pics/search_arrow.svg" alt="search arrow")
+          .search-wrap
+          
+            input(type="text" name="search" placeholder="Explore new articles...")
+            button(type="submit")
+              img(src="_pics/search_arrow.svg" alt="search arrow")
+          
+          .advanced-search-wrap
+            .link
+              span.open-advanced Advanced Search
+            
+            .advanced-search-items
+              label(for="author-input") Author:
+              input(type="text" id="author-input" name="author")
+              label(for="publisher-input") Publisher:
+              input(type="text" id="publisher-input" name="publisher")
+              
       include _includes/pages/index/login-buttons.php
-      //.login-register-buttons-wrap
-        a.button.light(href="login.php") Login
-        a.button.outline(href="register.php") Sign Up  
+
          
   
  
