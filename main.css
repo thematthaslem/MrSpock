@@ -55,17 +55,18 @@ body, a {
   font-weight: bold;
 }
 
-a.plain {
+a.plain, .link {
   color: #93a2bf;
   text-decoration: underline;
+  cursor: pointer;
 }
-a.plain:hover {
+a.plain:hover, .link:hover {
   color: #626c80;
 }
-a.plain.dark {
+a.plain.dark, .link.dark {
   color: #313640;
 }
-a.plain.dark:hover {
+a.plain.dark:hover, .link.dark:hover {
   color: #626c80;
 }
 
@@ -169,30 +170,61 @@ p {
   width: 160px;
   height: auto;
 }
-.all-content.index .content-wrap .search-wrap form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
+.all-content.index .content-wrap .login-register-buttons-wrap a:not(:last-child) {
+  margin-right: 15px;
 }
-.all-content.index .content-wrap .search-wrap form input[type=text] {
+
+.search-wrap-all form input[type=text] {
   width: 400px;
   max-width: 80vw;
   padding: 20px;
   margin-right: 15px;
   border-radius: 12px;
 }
-.all-content.index .content-wrap .search-wrap form button {
+.search-wrap-all form button {
   cursor: pointer;
   padding: 21px;
 }
-.all-content.index .content-wrap .search-wrap form button img {
+.search-wrap-all form button img {
   width: 13px;
   height: 13px;
 }
-.all-content.index .content-wrap .login-register-buttons-wrap a:not(:last-child) {
-  margin-right: 15px;
+.search-wrap-all .search-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.search-wrap-all .advanced-search-wrap {
+  width: 470px;
+}
+.search-wrap-all .advanced-search-wrap .link {
+  margin: 15px 0;
+}
+.search-wrap-all .advanced-search-wrap .advanced-search-items {
+  transition: all 300ms ease-in-out;
+  max-height: 0px;
+  padding: 0px;
+  background: #626c80;
+  border: solid 0px #313640;
+  overflow: hidden;
+  color: #272b33;
+}
+.search-wrap-all .advanced-search-wrap .advanced-search-items > input {
+  margin-top: 8px;
+}
+.search-wrap-all .advanced-search-wrap .advanced-search-items > input:not(:last-child) {
+  margin-bottom: 14px;
+}
+.search-wrap-all .advanced-search-wrap .advanced-search-items.open {
+  max-height: 100%;
+  padding: 25px;
+  border-width: 6px;
+}
+.search-wrap-all .advanced-search-wrap .advanced-search-items input[type=text] {
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .all-content.login {
