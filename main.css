@@ -30,7 +30,7 @@ a {
 
 body, html {
   max-width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 @font-face {
@@ -324,6 +324,203 @@ p {
 }
 .all-content.edit-info .content-wrap .form-wrap form input[type=text], .all-content.edit-info .content-wrap .form-wrap form input[type=password], .all-content.edit-info .content-wrap .form-wrap form input[type=email] {
   width: 250px;
+}
+
+body.serp {
+  background-color: #908b87;
+  background-image: url("_pics/spock_bg.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 95% 95%;
+  background-size: 240px 240px;
+}
+
+.all-content.serp {
+  width: 100vw;
+  height: 100vh;
+}
+.all-content.serp .top-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  background-color: #272b33;
+  padding: 30px;
+}
+.all-content.serp .top-bar .logo-wrap {
+  margin-right: 80px;
+}
+.all-content.serp .top-bar .logo-wrap img {
+  width: 140px;
+}
+.all-content.serp .top-bar .search-wrap-all {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.all-content.serp .top-bar .search-wrap-all form {
+  margin: 0;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap input[type=text] {
+  padding: 8px;
+  border-radius: 6px;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap button[type=submit] {
+  cursor: pointer;
+  padding: 10px;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap {
+  position: relative;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .link {
+  margin: 8px 0 0 0;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items {
+  transition: none;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  height: 170px;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items.open {
+  min-height: 170px;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap label {
+  margin-bottom: 4px;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap input:not(:last-child) {
+  margin-bottom: 8px;
+}
+.all-content.serp .main-content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  padding: 40px 0;
+  overflow: auto;
+}
+.all-content.serp .main-content-wrap .results-wrap {
+  padding: 50px;
+  background-color: white;
+  max-width: min(70vw, 940px);
+  width: min(70vw, 940px);
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  color: #272b33;
+  padding: 40px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item:nth-child(odd) {
+  background-color: #e8eff7;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  flex: 5;
+  padding-right: 40px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info > *:not(:last-child) {
+  margin-bottom: 15px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .title {
+  font-size: 16px;
+  line-height: 1.2em;
+  color: #626c80;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .title a {
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .title a:hover {
+  text-decoration: underline;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .authors, .all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .publishers {
+  color: #93a2bf;
+  font-style: oblique;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .desc {
+  color: #333333;
+  line-height: 1.4em;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .desc p {
+  color: inherit;
+  max-width: inherit;
+  line-height: inherit;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .desc a {
+  color: #93a2bf;
+  text-decoration: underline;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .desc a:hover {
+  color: #626c80;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex: 1;
+  max-width: 140px;
+  min-width: 140px;
+  width: 140px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap h3 {
+  margin-bottom: 10px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap .download-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  color: #f5ab58;
+  margin-bottom: 10px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap .download-item:hover {
+  text-decoration: underline;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap .download-item img {
+  width: 15px;
+  height: auto;
+  margin-right: 12px;
+}
+.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap .download-item .title {
+  max-width: 120px;
+  word-wrap: break-word;
 }
 
 input[type=text], input[type=password], input[type=email] {

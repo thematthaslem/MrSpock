@@ -58,7 +58,7 @@
     <div class="content-wrap">
       <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
       <div class="search-wrap-all">
-        <form method="GET" action="results.php">
+        <form method="GET" action="serp.php">
           <div class="search-wrap">
             <input type="text" name="search" placeholder="Explore new articles..."/>
             <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
