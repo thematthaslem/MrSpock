@@ -2,10 +2,21 @@
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
+  if(isset($_GET['id']))
+  {
+    $doc_id = $_GET['id'];
+  }
+  else
+  {
+    header('Location:index.php');
+  }
+
+
+
 /*
   THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
   LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
-*/
+
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -24,7 +35,7 @@
                        ['match' => [
                            'publisher' => [
                                'query'     => $publisher,
-                               //'fuzziness' => '1'
+                               'fuzziness' => '1'
                            ]
                        ]],
                        ['match' => [
@@ -39,117 +50,42 @@
         ]
    ];
 
-
-/*
-  THIS ONE ONLY INCLUDES RESULT WITH AUTHOR OR PUBLISHER MATHCES
-  -- The problem is, it return every document if Author is not set
-*/
-/*
    $params = [
         'index' => 'test_index',
         'body' => [
-            'sort' => [
-                '_score'
-            ],
             'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
-                            ]
-                        ]]
-                   ],
 
-                   'must' => [
-                      ['match' => [
-                          'publisher' => [
-                            'query' => $publisher,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
-                      ],
-                      ['match' => [
-                          'contributor_author' => [
-                            'query' => $author,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
+                    ['match' => [
+                        '_id' => $doc_id
                       ]
-                   ]
-                ],
-            ],
-         ]
+                    ]
+
+                ]
+            ]
     ];
 
-/*
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'sort' => [
-                '_score'
-            ],
-            'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
-                            ]
-                          ]
-                        ],
-                        ['match' => [
-                            'publisher' => [
-                              'query' => $publisher,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
-                            ]
-                          ]
-                        ],
-                        ['match' => [
-                            'contributor_author' => [
-                              'query' => $author,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
-                            ]
-                          ]
-                        ]
-                   ]
-                ],
-            ],
-         ]
-    ];
 */
-
+$params = [
+  'index' => 'test_index',
+  'id' => $doc_id
+];
 
   //print_r($params);
   //echo '<br/><br/>';
-  $response = $client->search($params);
+  $response = $client->get($params);
   //print_r($response);
 
-  $item_count = $response['hits']['total']['value'];
-  $items = $response['hits']['hits'];
+  $data = $response['_source'];
 ?>
-
-
-<h1>Results</h1>
-<h2>Found <?php echo $item_count; ?> Results</h2>
 
 
 <div class="items-wrap">
 <?php
-  foreach ($items as $item) {
     //print_r($item);
-    $data = $item['_source'];
     if(isset($data['relation_haspart']))
     {
       $downloads = $data['relation_haspart'];
     }
-    $item_id = $item['_id'];
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
@@ -162,10 +98,9 @@
           <?php
             if( !empty($data['description_abstract']) )
             {
-              echo substr($data['description_abstract'],0,550);
+              echo $data['description_abstract'];
             }
           ?>
-          ( <a href="page.php?id=<?php echo $item_id; ?>">Read More</a> )
       </div>
     </div>
     <div class="downloads-wrap">
@@ -188,7 +123,7 @@
       <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
         <div class="download-item">
           <img src="_pics/PDF_icon.svg"/>
-          <div class="title"><?php echo $download;//substr($download,0,16); ?></div>
+          <div class="title"><?php echo $download//substr($download,0,16); ?></div>
         </div>
       </a>
       <?php
@@ -210,6 +145,5 @@
   </div>
     <?php
       }
-    }
     ?>
 </div>
