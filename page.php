@@ -217,8 +217,6 @@ $params = [
     ?>
 </div>
 
-        <!--h1 Results  -->
-        <!--h2 # of Results  -->
         <!--.items-wrap
         .item
           .item-info

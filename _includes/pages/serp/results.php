@@ -3,9 +3,54 @@
   $client = Elasticsearch\ClientBuilder::create()->build();
 
 /*
+  SEARCH AND FILTER
+*/
+
+$params = [
+     'index' => 'test_index',
+     'body' => [
+         'sort' => [
+             '_score'
+         ],
+         'query' => [
+            'bool' => [
+
+                'must' => [
+                  ['match_phrase' => [
+                      'title' => [
+                         'query'     => $search
+                         //'fuzziness' => '2'
+                      ]
+                    ]
+                  ],
+                   ['match' => [
+                       'publisher' => [
+                         'query' => $publisher,
+                         'zero_terms_query' => 'all',
+                         'fuzziness' => '1'
+                       ]
+                     ]
+                   ],
+                   ['match' => [
+                       'contributor_author' => [
+                         'query' => $author,
+                         'zero_terms_query' => 'all',
+                         'fuzziness' => '1'
+                       ]
+                     ]
+                   ]
+                ]
+             ],
+         ],
+      ]
+ ];
+
+
+/*
   THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
   LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
 */
+/*
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -38,7 +83,7 @@
            ],
         ]
    ];
-
+*/
 
 /*
   THIS ONE ONLY INCLUDES RESULT WITH AUTHOR OR PUBLISHER MATHCES
@@ -137,7 +182,7 @@
 
 
 <h1>Results</h1>
-<h2>Found <?php echo $item_count; ?> Results</h2>
+<h2>Found <?php echo $item_count; ?> Results for "<?php echo $search; ?>"</h2>
 
 
 <div class="items-wrap">

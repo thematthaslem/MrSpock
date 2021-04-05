@@ -408,6 +408,11 @@ body.serp, body.page {
 .all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap input:not(:last-child), .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap input:not(:last-child) {
   margin-bottom: 8px;
 }
+.all-content.serp .top-bar .nav-wrap, .all-content.page .top-bar .nav-wrap {
+  width: 100%;
+  text-align: right;
+  padding-right: 50px;
+}
 .all-content.serp .main-content-wrap, .all-content.page .main-content-wrap {
   display: flex;
   flex-direction: column;
