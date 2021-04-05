@@ -1,0 +1,53 @@
+// output: serp.php
+include _includes/issession.php
+html      
+head                       
+  title Mr. Spock - Search Results            
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts      
+body.serp       
+  .all-content.serp               
+    include _includes/pages/serp/top-bar.php    
+    //.top-bar            
+      .logo-wrap        
+        img(src="_pics/logo.png" alt="Mr. Spock Logo")      
+      .search-wrap-all   
+        form  
+          .search-wrap
+            input(type="text" name="search" placeholder="Explore new articles...")
+            button(type="submit")
+              img(src="_pics/search_arrow.svg" alt="search arrow")
+ 
+          .advanced-search-wrap
+            .link
+              span.open-advanced Advanced Search
+            
+            .advanced-search-items
+              .items-wrap
+                label(for="author-input") Author:
+                input(type="text" id="author-input" name="author")
+                label(for="publisher-input") Publisher:
+                input(type="text" id="publisher-input" name="publisher")
+
+    .main-content-wrap
+      .results-wrap
+        include _includes/pages/serp/results.php
+        //h1 Results
+        //h2 # of Results
+        
+        //.items-wrap
+          .item
+            .item-info
+              .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
+              .desc 
+                | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+            .downloads-wrap
+              
+              a(href="_files_dissertation/11042/ETDAppendixA.pdf")
+                .download-item
+                  img(src="_pics/PDF_icon.svg")
+                  .title ETDAppendixA.pdf
+              a(href="_files_dissertation/11042/ETDAppendixA.pdf")
+                .download-item
+                  img(src="_pics/PDF_icon.svg")
+                  .title ETDAppendixA.pdf
