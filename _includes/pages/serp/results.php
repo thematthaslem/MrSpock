@@ -16,7 +16,7 @@ $params = [
             'bool' => [
 
                 'must' => [
-                  ['match_phrase' => [
+                  ['match' => [
                       'title' => [
                          'query'     => $search
                          //'fuzziness' => '2'
