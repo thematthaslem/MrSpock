@@ -57,10 +57,21 @@
     -->
     <div class="content-wrap">
       <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
-      <div class="search-wrap">
-        <form method="GET" action="results.php">
-          <input type="text" name="search" placeholder="Explore new articles..."/>
-          <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
+      <div class="search-wrap-all">
+        <form method="GET" action="serp.php">
+          <div class="search-wrap">
+            <input type="text" name="search" placeholder="Explore new articles..."/>
+            <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
+          </div>
+          <div class="advanced-search-wrap">
+            <div class="link"><span class="open-advanced">Advanced Search</span></div>
+            <div class="advanced-search-items">
+              <label for="author-input">Author:</label>
+              <input type="text" id="author-input" name="author"/>
+              <label for="publisher-input">Publisher:</label>
+              <input type="text" id="publisher-input" name="publisher"/>
+            </div>
+          </div>
         </form>
       </div><?php
   // If not logged in, don't show login/register buttons
@@ -72,11 +83,6 @@
   }
 ?>
 
-      <!--.login-register-buttons-wrap
-      a.button.light(href="login.php") Login
-      a.button.outline(href="register.php") Sign Up  
-       
-      -->
     </div>
   </div>
 </body>

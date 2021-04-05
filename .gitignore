@@ -1,2 +1,7 @@
-/_files_dissertation/
-/vendor/
+# Don't need all the pdf files
+/_files_dissertation
+/vendor
+/_design
+*.ai
+test.php
+*.map

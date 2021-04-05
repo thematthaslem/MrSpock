@@ -28,12 +28,39 @@
 
   if ($data->execute())
   {
+    // send email
+    // E-mail contains a link that links to 'confirm_email' with GET values for token (token -> confirm_email token)
+    $msg = 'Click the link to reset your password:
+    <a href="http://localhost/_school/cs418/git/haslem-project/resetpass.php?token=' . $token . '">' . $token . '</a>';
+    $subject = "Mr. Spock Account confirmation";
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: Mr. Spock";
+    // If confirmation e-mail is sent
+    if(mail($email,$subject,$msg, $headers))
+    {
+
+      $_SESSION['success'] = "An email has been sent to " . $email . " with a link to use to reset your password.";
+      /*
+        NOTE: Don't need to sign them in automattically since they haven't confirmed their email yet
+
+      $_SESSION['user'] = $email;
+      */
+      header('Location: ../successpage.php');
+
+
+    }
+    else
+    {
+      $error_arr[] = "Sorry, Captain. An error occured with sending an e-mail.";
+    }
+    /*
     echo '
     <h2>What should be emailed: </h2>
 
     Click the link to reset your password:
     <a href="../resetpass.php?token=' . $token . '">' . $token . '</a>
-    ';
+    ';*/
   }
 
 ?>

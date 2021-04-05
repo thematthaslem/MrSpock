@@ -9,7 +9,7 @@
 ?>
 
 <html>     </html>
-<head>
+<head>                      
   <title>Mr. Spock - Search Results            </title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
@@ -18,26 +18,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="_jquery/jq.js"></script>
 </head>
-<body class="serp">
-  <div class="all-content serp">             <?php
-  /*
-      Get search info
-  */
-  $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
-  $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
-  $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
-
-
-?>
-
-<div class="top-bar">
+<body class="page">
+  <div class="all-content page"><div class="top-bar">
   <a href="index.php">
     <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
   </a>
   <div class="search-wrap-all">
-    <form>
+    <form action="serp.php" method="get">
       <div class="search-wrap">
-        <input type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
+        <input type="text" name="search" placeholder="Explore new articles..."/>
         <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
       </div>
       <div class="advanced-search-wrap">
@@ -45,96 +34,58 @@
         <div class="advanced-search-items">
           <div class="items-wrap">
             <label for="author-input">Author:</label>
-            <input type="text" id="author-input" name="author" value="<?php echo $author; ?>"/>
+            <input type="text" id="author-input" name="author" />
             <label for="publisher-input">Publisher:</label>
-            <input type="text" id="publisher-input" name="publisher" value="<?php echo $publisher; ?>"/>
+            <input type="text" id="publisher-input" name="publisher" />
           </div>
         </div>
       </div>
     </form>
   </div>
-
-  <div class="nav-wrap">
-    <a class="link" href="add-document.php">+ Add New Document</a>
-  </div>
 </div>
 
-    <!--.top-bar
-    .logo-wrap
-      img(src="_pics/logo.png" alt="Mr. Spock Logo")
-    .search-wrap-all
-      form
+    <!--.top-bar        
+    .logo-wrap   
+      img(src="_pics/logo.png" alt="Mr. Spock Logo") 
+    .search-wrap-all 
+      form 
         .search-wrap
           input(type="text" name="search" placeholder="Explore new articles...")
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow")
-
+    
         .advanced-search-wrap
           .link
             span.open-advanced Advanced Search
-
+          
           .advanced-search-items
             .items-wrap
               label(for="author-input") Author:
               input(type="text" id="author-input" name="author")
               label(for="publisher-input") Publisher:
               input(type="text" id="publisher-input" name="publisher")
-
+    
     -->
-    <div class="main-content-wrap">
-      <div class="results-wrap"><?php
+    <div class="main-content-wrap"> 
+      <div class="results-wrap">      <?php
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
-/*
-  SEARCH AND FILTER
-*/
+  if(isset($_GET['id']))
+  {
+    $doc_id = $_GET['id'];
+  }
+  else
+  {
+    header('Location:index.php');
+  }
 
-$params = [
-     'index' => 'test_index',
-     'body' => [
-         'sort' => [
-             '_score'
-         ],
-         'query' => [
-            'bool' => [
-
-                'must' => [
-                  ['match_phrase' => [
-                      'title' => [
-                         'query'     => $search
-                         //'fuzziness' => '2'
-                      ]
-                    ]
-                  ],
-                   ['match' => [
-                       'publisher' => [
-                         'query' => $publisher,
-                         'zero_terms_query' => 'all',
-                         'fuzziness' => '1'
-                       ]
-                     ]
-                   ],
-                   ['match' => [
-                       'contributor_author' => [
-                         'query' => $author,
-                         'zero_terms_query' => 'all',
-                         'fuzziness' => '1'
-                       ]
-                     ]
-                   ]
-                ]
-             ],
-         ],
-      ]
- ];
 
 
 /*
   THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
   LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
-*/
-/*
+
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -153,7 +104,7 @@ $params = [
                        ['match' => [
                            'publisher' => [
                                'query'     => $publisher,
-                               //'fuzziness' => '1'
+                               'fuzziness' => '1'
                            ]
                        ]],
                        ['match' => [
@@ -167,118 +118,43 @@ $params = [
            ],
         ]
    ];
-*/
 
-/*
-  THIS ONE ONLY INCLUDES RESULT WITH AUTHOR OR PUBLISHER MATHCES
-  -- The problem is, it return every document if Author is not set
-*/
-/*
    $params = [
         'index' => 'test_index',
         'body' => [
-            'sort' => [
-                '_score'
-            ],
             'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
-                            ]
-                        ]]
-                   ],
 
-                   'must' => [
-                      ['match' => [
-                          'publisher' => [
-                            'query' => $publisher,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
-                      ],
-                      ['match' => [
-                          'contributor_author' => [
-                            'query' => $author,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
+                    ['match' => [
+                        '_id' => $doc_id
                       ]
-                   ]
-                ],
-            ],
-         ]
+                    ]
+
+                ]
+            ]
     ];
 
-/*
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'sort' => [
-                '_score'
-            ],
-            'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
-                            ]
-                          ]
-                        ],
-                        ['match' => [
-                            'publisher' => [
-                              'query' => $publisher,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
-                            ]
-                          ]
-                        ],
-                        ['match' => [
-                            'contributor_author' => [
-                              'query' => $author,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
-                            ]
-                          ]
-                        ]
-                   ]
-                ],
-            ],
-         ]
-    ];
 */
-
+$params = [
+  'index' => 'test_index',
+  'id' => $doc_id
+];
 
   //print_r($params);
   //echo '<br/><br/>';
-  $response = $client->search($params);
+  $response = $client->get($params);
   //print_r($response);
 
-  $item_count = $response['hits']['total']['value'];
-  $items = $response['hits']['hits'];
+  $data = $response['_source'];
 ?>
-
-
-<h1>Results</h1>
-<h2>Found <?php echo $item_count; ?> Results for "<?php echo $search; ?>"</h2>
 
 
 <div class="items-wrap">
 <?php
-  foreach ($items as $item) {
     //print_r($item);
-    $data = $item['_source'];
     if(isset($data['relation_haspart']))
     {
       $downloads = $data['relation_haspart'];
     }
-    $item_id = $item['_id'];
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
@@ -291,10 +167,9 @@ $params = [
           <?php
             if( !empty($data['description_abstract']) )
             {
-              echo substr($data['description_abstract'],0,550);
+              echo $data['description_abstract'];
             }
           ?>
-          ( <a href="page.php?id=<?php echo $item_id; ?>">Read More</a> )
       </div>
     </div>
     <div class="downloads-wrap">
@@ -317,7 +192,7 @@ $params = [
       <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
         <div class="download-item">
           <img src="_pics/PDF_icon.svg"/>
-          <div class="title"><?php echo $download;//substr($download,0,16); ?></div>
+          <div class="title"><?php echo $download//substr($download,0,16); ?></div>
         </div>
       </a>
       <?php
@@ -339,20 +214,17 @@ $params = [
   </div>
     <?php
       }
-    }
     ?>
 </div>
 
-        <!--h1 Results-->
-        <!--h2 # of Results-->
         <!--.items-wrap
         .item
           .item-info
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
-            .desc
+            .desc 
               | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
           .downloads-wrap
-
+            
             a(href="_files_dissertation/11042/ETDAppendixA.pdf")
               .download-item
                 img(src="_pics/PDF_icon.svg")
