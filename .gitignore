@@ -3,3 +3,5 @@
 /vendor
 /_design
 *.ai
+test.php
+*.map

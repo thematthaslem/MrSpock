@@ -2,9 +2,9 @@
   /*
       Get search info
   */
-  $search = $_GET['search'];
-  $author = $_GET['author'];
-  $publisher = $_GET['publisher'];
+  $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+  $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
+  $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
 
 
 ?>
@@ -31,5 +31,9 @@
         </div>
       </div>
     </form>
+  </div>
+
+  <div class="nav-wrap">
+    <a class="link" href="add-document.php">+ Add New Document</a>
   </div>
 </div>

@@ -18,14 +18,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="_jquery/jq.js"></script>
 </head>
-<body class="serp">
-  <div class="all-content serp">   <?php
+<body class="serp">    
+  <div class="all-content serp">             <?php
   /*
       Get search info
   */
-  $search = $_GET['search'];
-  $author = $_GET['author'];
-  $publisher = $_GET['publisher'];
+  $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+  $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
+  $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
 
 
 ?>
@@ -53,9 +53,13 @@
       </div>
     </form>
   </div>
+
+  <div class="nav-wrap">
+    <a class="link" href="add-document.php">+ Add New Document</a>
+  </div>
 </div>
 
-    <!--.top-bar           
+    <!--.top-bar            
     .logo-wrap        
       img(src="_pics/logo.png" alt="Mr. Spock Logo")      
     .search-wrap-all   
@@ -83,9 +87,54 @@
   $client = Elasticsearch\ClientBuilder::create()->build();
 
 /*
+  SEARCH AND FILTER
+*/
+
+$params = [
+     'index' => 'test_index',
+     'body' => [
+         'sort' => [
+             '_score'
+         ],
+         'query' => [
+            'bool' => [
+
+                'must' => [
+                  ['match_phrase' => [
+                      'title' => [
+                         'query'     => $search
+                         //'fuzziness' => '2'
+                      ]
+                    ]
+                  ],
+                   ['match' => [
+                       'publisher' => [
+                         'query' => $publisher,
+                         'zero_terms_query' => 'all',
+                         'fuzziness' => '1'
+                       ]
+                     ]
+                   ],
+                   ['match' => [
+                       'contributor_author' => [
+                         'query' => $author,
+                         'zero_terms_query' => 'all',
+                         'fuzziness' => '1'
+                       ]
+                     ]
+                   ]
+                ]
+             ],
+         ],
+      ]
+ ];
+
+
+/*
   THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
   LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
 */
+/*
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -118,7 +167,7 @@
            ],
         ]
    ];
-
+*/
 
 /*
   THIS ONE ONLY INCLUDES RESULT WITH AUTHOR OR PUBLISHER MATHCES
@@ -217,7 +266,7 @@
 
 
 <h1>Results</h1>
-<h2>Found <?php echo $item_count; ?> Results</h2>
+<h2>Found <?php echo $item_count; ?> Results for "<?php echo $search; ?>"</h2>
 
 
 <div class="items-wrap">
