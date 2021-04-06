@@ -2,188 +2,184 @@
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
-/*
-  SEARCH AND FILTER
-*/
 
-$params = [
-     'index' => 'test_index',
-     'body' => [
-         'sort' => [
-             '_score'
-         ],
-         'query' => [
-            'bool' => [
+  // The number of results per page
+  $page_size = 5;
 
-                'must' => [
-                  ['match' => [
-                      'title' => [
-                         'query'     => $search
-                         //'fuzziness' => '2'
-                      ]
-                    ]
-                  ],
-                   ['match' => [
-                       'publisher' => [
-                         'query' => $publisher,
-                         'zero_terms_query' => 'all',
-                         'fuzziness' => '1'
-                       ]
-                     ]
-                   ],
-                   ['match' => [
-                       'contributor_author' => [
-                         'query' => $author,
-                         'zero_terms_query' => 'all',
-                         'fuzziness' => '1'
-                       ]
-                     ]
-                   ]
-                ]
-             ],
-         ],
-      ]
- ];
+  /*
+   Calculate starting point for results on this page
+
+    - There are 10 results per page.
+      -- Starting result = 10 * page # (if there is no page #, make it zero)
+  */
+  if(isset($_GET['page']))
+  {
+    $curr_page_number = $_GET['page'];
+  }
+  else
+  {
+    $curr_page_number = 0;
+  }
+
+  $start_of_results = $page_size * $curr_page_number;
 
 
-/*
-  THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
-  LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
-*/
-/*
+
+
+  /*
+    SEARCH AND FILTER
+  */
+
   $params = [
        'index' => 'test_index',
        'body' => [
            'sort' => [
                '_score'
            ],
+           'from' => $start_of_results,
+           'size' => $page_size,
            'query' => [
               'bool' => [
-                  'should' => [
-                       ['match' => [
-                           'title' => [
-                              'query'     => $search,
-                              'fuzziness' => '2'
-                           ]
-                       ]],
-                       ['match' => [
-                           'publisher' => [
-                               'query'     => $publisher,
-                               //'fuzziness' => '1'
-                           ]
-                       ]],
-                       ['match' => [
-                           'contributor_author' => [
-                               'query'     => $author,
-                               //'fuzziness' => '1'
-                           ]
-                       ]]
+
+                  'must' => [
+                    ['match' => [
+                        'title' => [
+                           'query'     => $search
+                           //'fuzziness' => '2'
+                        ]
+                      ]
+                    ],
+                     ['match' => [
+                         'publisher' => [
+                           'query' => $publisher,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_author' => [
+                           'query' => $author,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ]
                   ]
                ],
            ],
         ]
    ];
-*/
 
-/*
-  THIS ONE ONLY INCLUDES RESULT WITH AUTHOR OR PUBLISHER MATHCES
-  -- The problem is, it return every document if Author is not set
-*/
-/*
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'sort' => [
-                '_score'
-            ],
-            'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
-                            ]
-                        ]]
-                   ],
 
-                   'must' => [
-                      ['match' => [
-                          'publisher' => [
-                            'query' => $publisher,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
-                      ],
-                      ['match' => [
-                          'contributor_author' => [
-                            'query' => $author,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
-                      ]
-                   ]
-                ],
-            ],
-         ]
-    ];
+  /*
+    THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
+    LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
+  */
+  /*
+    $params = [
+         'index' => 'test_index',
+         'body' => [
+             'sort' => [
+                 '_score'
+             ],
+             'query' => [
+                'bool' => [
+                    'should' => [
+                         ['match' => [
+                             'title' => [
+                                'query'     => $search,
+                                'fuzziness' => '2'
+                             ]
+                         ]],
+                         ['match' => [
+                             'publisher' => [
+                                 'query'     => $publisher,
+                                 //'fuzziness' => '1'
+                             ]
+                         ]],
+                         ['match' => [
+                             'contributor_author' => [
+                                 'query'     => $author,
+                                 //'fuzziness' => '1'
+                             ]
+                         ]]
+                    ]
+                 ],
+             ],
+          ]
+     ];
+  */
 
-/*
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'sort' => [
-                '_score'
-            ],
-            'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
+  /*
+     $params = [
+          'index' => 'test_index',
+          'body' => [
+              'sort' => [
+                  '_score'
+              ],
+              'query' => [
+                 'bool' => [
+                     'should' => [
+                          ['match' => [
+                              'title' => [
+                                 'query'     => $search
+                                 //'fuzziness' => '2'
+                              ]
                             ]
-                          ]
-                        ],
-                        ['match' => [
-                            'publisher' => [
-                              'query' => $publisher,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
+                          ],
+                          ['match' => [
+                              'publisher' => [
+                                'query' => $publisher,
+                                'zero_terms_query' => 'all',
+                                'fuzziness' => '1'
+                              ]
                             ]
-                          ]
-                        ],
-                        ['match' => [
-                            'contributor_author' => [
-                              'query' => $author,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
+                          ],
+                          ['match' => [
+                              'contributor_author' => [
+                                'query' => $author,
+                                'zero_terms_query' => 'all',
+                                'fuzziness' => '1'
+                              ]
                             ]
                           ]
-                        ]
-                   ]
-                ],
-            ],
-         ]
-    ];
-*/
+                     ]
+                  ],
+              ],
+           ]
+      ];
+  */
 
 
-  //print_r($params);
-  //echo '<br/><br/>';
   $response = $client->search($params);
-  //print_r($response);
-
   $item_count = $response['hits']['total']['value'];
   $items = $response['hits']['hits'];
+
+  /*
+   Calculate the number of pages
+    - There are 10 results per page.
+      -- # of pages = the number of items / 10
+  */
+
+  $number_of_pages = ceil($item_count / $page_size);
+
 ?>
+
+
+
 
 
 <h1>Results</h1>
 <h2>Found <?php echo $item_count; ?> Results for "<?php echo $search; ?>"</h2>
 
+
+<?php
+  /*
+    Show pagination at the top of the page
+  */
+  include('_includes/pages/serp/pagination.php');
+?>
 
 <div class="items-wrap">
 <?php

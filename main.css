@@ -82,6 +82,12 @@ h2 {
   color: #272b33;
 }
 
+h3 {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #272b33;
+}
+
 p {
   color: #93a2bf;
   margin-bottom: 20px;
@@ -90,6 +96,10 @@ p {
 
 .txt-light {
   color: #93a2bf;
+}
+
+.txt-center {
+  text-align: center;
 }
 
 .all-content.index {
@@ -526,6 +536,34 @@ body.serp, body.page {
 .all-content.serp .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap .download-item .title, .all-content.page .main-content-wrap .results-wrap .items-wrap .item .downloads-wrap .download-item .title {
   max-width: 120px;
   word-wrap: break-word;
+}
+.all-content.serp .main-content-wrap .pagination-wrap, .all-content.page .main-content-wrap .pagination-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 30px 0px;
+}
+.all-content.serp .main-content-wrap .pagination-wrap .pagination-item, .all-content.page .main-content-wrap .pagination-wrap .pagination-item {
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  background: #626c80;
+  color: white;
+}
+.all-content.serp .main-content-wrap .pagination-wrap .pagination-item:not(:last-child), .all-content.page .main-content-wrap .pagination-wrap .pagination-item:not(:last-child) {
+  margin-right: 8px;
+}
+.all-content.serp .main-content-wrap .pagination-wrap .pagination-item:hover, .all-content.page .main-content-wrap .pagination-wrap .pagination-item:hover {
+  background: #272b33;
+}
+.all-content.serp .main-content-wrap .pagination-wrap .pagination-item.active, .all-content.page .main-content-wrap .pagination-wrap .pagination-item.active {
+  background: rgba(0, 0, 0, 0);
+  border: solid 4px #626c80;
+  color: #626c80;
+  cursor: default;
+  padding: 4px 8px;
 }
 
 input[type=text], input[type=password], input[type=email] {

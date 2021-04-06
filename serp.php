@@ -18,8 +18,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="_jquery/jq.js"></script>
 </head>
-<body class="serp">      
-  <div class="all-content serp">               <?php
+<body class="serp">        
+  <div class="all-content serp">                       <?php
   /*
       Get search info
   */
@@ -60,16 +60,16 @@
 </div>
 
     <!--.top-bar            
-    .logo-wrap        
+    .logo-wrap         
       img(src="_pics/logo.png" alt="Mr. Spock Logo")      
     .search-wrap-all   
       form  
-        .search-wrap
+        .search-wrap  
           input(type="text" name="search" placeholder="Explore new articles...")
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow")
     
-        .advanced-search-wrap
+        .advanced-search-wrap  
           .link
             span.open-advanced Advanced Search
           
@@ -81,193 +81,189 @@
               input(type="text" id="publisher-input" name="publisher")
     
     -->
-    <div class="main-content-wrap">
-      <div class="results-wrap"><?php
+    <div class="main-content-wrap"> 
+      <div class="results-wrap">  <?php
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
-/*
-  SEARCH AND FILTER
-*/
 
-$params = [
-     'index' => 'test_index',
-     'body' => [
-         'sort' => [
-             '_score'
-         ],
-         'query' => [
-            'bool' => [
+  // The number of results per page
+  $page_size = 5;
 
-                'must' => [
-                  ['match' => [
-                      'title' => [
-                         'query'     => $search
-                         //'fuzziness' => '2'
-                      ]
-                    ]
-                  ],
-                   ['match' => [
-                       'publisher' => [
-                         'query' => $publisher,
-                         'zero_terms_query' => 'all',
-                         'fuzziness' => '1'
-                       ]
-                     ]
-                   ],
-                   ['match' => [
-                       'contributor_author' => [
-                         'query' => $author,
-                         'zero_terms_query' => 'all',
-                         'fuzziness' => '1'
-                       ]
-                     ]
-                   ]
-                ]
-             ],
-         ],
-      ]
- ];
+  /*
+   Calculate starting point for results on this page
+
+    - There are 10 results per page.
+      -- Starting result = 10 * page # (if there is no page #, make it zero)
+  */
+  if(isset($_GET['page']))
+  {
+    $curr_page_number = $_GET['page'];
+  }
+  else
+  {
+    $curr_page_number = 0;
+  }
+
+  $start_of_results = $page_size * $curr_page_number;
 
 
-/*
-  THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
-  LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
-*/
-/*
+
+
+  /*
+    SEARCH AND FILTER
+  */
+
   $params = [
        'index' => 'test_index',
        'body' => [
            'sort' => [
                '_score'
            ],
+           'from' => $start_of_results,
+           'size' => $page_size,
            'query' => [
               'bool' => [
-                  'should' => [
-                       ['match' => [
-                           'title' => [
-                              'query'     => $search,
-                              'fuzziness' => '2'
-                           ]
-                       ]],
-                       ['match' => [
-                           'publisher' => [
-                               'query'     => $publisher,
-                               //'fuzziness' => '1'
-                           ]
-                       ]],
-                       ['match' => [
-                           'contributor_author' => [
-                               'query'     => $author,
-                               //'fuzziness' => '1'
-                           ]
-                       ]]
+
+                  'must' => [
+                    ['match' => [
+                        'title' => [
+                           'query'     => $search
+                           //'fuzziness' => '2'
+                        ]
+                      ]
+                    ],
+                     ['match' => [
+                         'publisher' => [
+                           'query' => $publisher,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_author' => [
+                           'query' => $author,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ]
                   ]
                ],
            ],
         ]
    ];
-*/
 
-/*
-  THIS ONE ONLY INCLUDES RESULT WITH AUTHOR OR PUBLISHER MATHCES
-  -- The problem is, it return every document if Author is not set
-*/
-/*
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'sort' => [
-                '_score'
-            ],
-            'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
-                            ]
-                        ]]
-                   ],
 
-                   'must' => [
-                      ['match' => [
-                          'publisher' => [
-                            'query' => $publisher,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
-                      ],
-                      ['match' => [
-                          'contributor_author' => [
-                            'query' => $author,
-                            'zero_terms_query' => 'all',
-                            'fuzziness' => '1'
-                          ]
-                        ]
-                      ]
-                   ]
-                ],
-            ],
-         ]
-    ];
+  /*
+    THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
+    LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
+  */
+  /*
+    $params = [
+         'index' => 'test_index',
+         'body' => [
+             'sort' => [
+                 '_score'
+             ],
+             'query' => [
+                'bool' => [
+                    'should' => [
+                         ['match' => [
+                             'title' => [
+                                'query'     => $search,
+                                'fuzziness' => '2'
+                             ]
+                         ]],
+                         ['match' => [
+                             'publisher' => [
+                                 'query'     => $publisher,
+                                 //'fuzziness' => '1'
+                             ]
+                         ]],
+                         ['match' => [
+                             'contributor_author' => [
+                                 'query'     => $author,
+                                 //'fuzziness' => '1'
+                             ]
+                         ]]
+                    ]
+                 ],
+             ],
+          ]
+     ];
+  */
 
-/*
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'sort' => [
-                '_score'
-            ],
-            'query' => [
-               'bool' => [
-                   'should' => [
-                        ['match' => [
-                            'title' => [
-                               'query'     => $search
-                               //'fuzziness' => '2'
+  /*
+     $params = [
+          'index' => 'test_index',
+          'body' => [
+              'sort' => [
+                  '_score'
+              ],
+              'query' => [
+                 'bool' => [
+                     'should' => [
+                          ['match' => [
+                              'title' => [
+                                 'query'     => $search
+                                 //'fuzziness' => '2'
+                              ]
                             ]
-                          ]
-                        ],
-                        ['match' => [
-                            'publisher' => [
-                              'query' => $publisher,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
+                          ],
+                          ['match' => [
+                              'publisher' => [
+                                'query' => $publisher,
+                                'zero_terms_query' => 'all',
+                                'fuzziness' => '1'
+                              ]
                             ]
-                          ]
-                        ],
-                        ['match' => [
-                            'contributor_author' => [
-                              'query' => $author,
-                              'zero_terms_query' => 'all',
-                              'fuzziness' => '1'
+                          ],
+                          ['match' => [
+                              'contributor_author' => [
+                                'query' => $author,
+                                'zero_terms_query' => 'all',
+                                'fuzziness' => '1'
+                              ]
                             ]
                           ]
-                        ]
-                   ]
-                ],
-            ],
-         ]
-    ];
-*/
+                     ]
+                  ],
+              ],
+           ]
+      ];
+  */
 
 
-  //print_r($params);
-  //echo '<br/><br/>';
   $response = $client->search($params);
-  //print_r($response);
-
   $item_count = $response['hits']['total']['value'];
   $items = $response['hits']['hits'];
+
+  /*
+   Calculate the number of pages
+    - There are 10 results per page.
+      -- # of pages = the number of items / 10
+  */
+
+  $number_of_pages = ceil($item_count / $page_size);
+
 ?>
+
+
+
 
 
 <h1>Results</h1>
 <h2>Found <?php echo $item_count; ?> Results for "<?php echo $search; ?>"</h2>
 
+
+<?php
+  /*
+    Show pagination at the top of the page
+  */
+  include('_includes/pages/serp/pagination.php');
+?>
 
 <div class="items-wrap">
 <?php
@@ -342,12 +338,56 @@ $params = [
     }
     ?>
 </div>
+<!-- <h3 class="txt-center">More results:</h3>-->
+<div class="pagination-wrap">
+  <?php
+
+    /*
+      Build the href for each page button
+        - Need to take the full url and get the query part
+        - create a new string with everything in the query, removing the old 'page' param
+        - add new page value
+    */
+    $curr_url = $_SERVER['QUERY_STRING'];
+    parse_str($curr_url, $query_params);
+
+    /*
+      Display pages links
+    */
+
+    for($i=1; $i<=$number_of_pages; $i++)
+    {
+      // Set page number for current item
+      $page_number = $i;
+      // change in array. (It's minus one because the 1st page should show result 0. 2nd page show 10)
+      $query_params['page'] = $page_number - 1;
+      // Put array in query to attach to href.
+      $page_query = http_build_query($query_params, '&');
+
+      // If it's on the current page, make the button unclickable. (give it the 'active' class)
+      $is_active = "";
+      if($page_number - 1 == $curr_page_number)
+      {
+        $is_active = "active";
+      }
+  ?>
+
+    <a
+      class="pagination-item <?php echo $is_active; ?>"
+      href="serp.php?<?php echo $page_query;?>"
+    >
+      <?php echo $i;?>
+    </a>
+  <?php
+    }
+  ?>
+</div>
 
         <!--h1 Results-->
         <!--h2 # of Results-->
-        <!--.items-wrap
-        .item
-          .item-info
+        <!--.items-wrap       
+        .item      
+          .item-info  
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
             .desc 
               | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
