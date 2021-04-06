@@ -69,11 +69,11 @@
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow")
     
-        .advanced-search-wrap  
+        .advanced-search-wrap   
           .link
             span.open-advanced Advanced Search
           
-          .advanced-search-items
+          .advanced-search-items 
             .items-wrap
               label(for="author-input") Author:
               input(type="text" id="author-input" name="author")

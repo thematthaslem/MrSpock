@@ -5,4 +5,3 @@ $('.open-advanced').on('click',
     $(this).parent().next('.advanced-search-items').toggleClass('open');
   }
 );
-console.log("HELL YEAR");

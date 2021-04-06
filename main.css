@@ -562,6 +562,15 @@ body.serp, body.page {
   padding: 4px 8px;
 }
 
+.all-content.page .main-content-wrap .results-wrap a.go-back-button {
+  border-radius: 6px;
+  background: #626c80;
+  color: white;
+  align-self: flex-start;
+}
+.all-content.page .main-content-wrap .results-wrap a.go-back-button:hover {
+  text-decoration: underline;
+}
 .all-content.page .main-content-wrap .results-wrap .item .item-info {
   color: #333333;
 }

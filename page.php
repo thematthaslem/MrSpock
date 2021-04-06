@@ -54,10 +54,10 @@
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow")
     
-        .advanced-search-wrap
+        .advanced-search-wrap 
           .link
-            span.open-advanced Advanced Search
-          
+            span.open-advanced Advanced Search 
+            
           .advanced-search-items 
             .items-wrap
               label(for="author-input") Author: 
@@ -105,6 +105,7 @@ $params = [
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
+  <a class="go-back-button button" href="#">< Back to Resultss</a>
   <div class="item">
     <div class="item-info">
       <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>

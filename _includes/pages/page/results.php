@@ -36,6 +36,7 @@ $params = [
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
+  <a class="go-back-button button" href="#">< Back to Results</a>
   <div class="item">
     <div class="item-info">
       <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>
