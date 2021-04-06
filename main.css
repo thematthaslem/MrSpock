@@ -482,10 +482,6 @@ body.serp, body.page {
 .all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .title a:hover, .all-content.page .main-content-wrap .results-wrap .items-wrap .item .item-info .title a:hover {
   text-decoration: underline;
 }
-.all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .authors, .all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .publishers, .all-content.page .main-content-wrap .results-wrap .items-wrap .item .item-info .authors, .all-content.page .main-content-wrap .results-wrap .items-wrap .item .item-info .publishers {
-  color: #93a2bf;
-  font-style: oblique;
-}
 .all-content.serp .main-content-wrap .results-wrap .items-wrap .item .item-info .desc, .all-content.page .main-content-wrap .results-wrap .items-wrap .item .item-info .desc {
   color: #333333;
   line-height: 1.4em;
@@ -564,6 +560,23 @@ body.serp, body.page {
   color: #626c80;
   cursor: default;
   padding: 4px 8px;
+}
+
+.all-content.page .main-content-wrap .results-wrap .item .item-info {
+  color: #333333;
+}
+.all-content.page .main-content-wrap .results-wrap .item .item-info span.key {
+  color: #626c80;
+  font-style: oblique;
+}
+.all-content.page .main-content-wrap .results-wrap .item .item-info hr {
+  width: 100%;
+  border: solid 3px #626c80;
+  margin: 20px 0px;
+}
+.all-content.page .main-content-wrap .results-wrap .item .item-info .desc {
+  margin-left: 15px;
+  margin-top: 15px;
 }
 
 input[type=text], input[type=password], input[type=email] {

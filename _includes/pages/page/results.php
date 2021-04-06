@@ -12,59 +12,6 @@
   }
 
 
-
-/*
-  THIS IS FOR IF THE AUTHORS AND PUBLISHERS DONT NEED TO BE AN EXACT MATCH
-  LIKE IF THE INPUTTED AUTHOR ISN'T ACTUALLY THE AUTHOR OF AN ARTICLE, THAT ARTICLE MIGHT STILL POP UP
-
-  $params = [
-       'index' => 'test_index',
-       'body' => [
-           'sort' => [
-               '_score'
-           ],
-           'query' => [
-              'bool' => [
-                  'should' => [
-                       ['match' => [
-                           'title' => [
-                              'query'     => $search,
-                              'fuzziness' => '2'
-                           ]
-                       ]],
-                       ['match' => [
-                           'publisher' => [
-                               'query'     => $publisher,
-                               'fuzziness' => '1'
-                           ]
-                       ]],
-                       ['match' => [
-                           'contributor_author' => [
-                               'query'     => $author,
-                               //'fuzziness' => '1'
-                           ]
-                       ]]
-                  ]
-               ],
-           ],
-        ]
-   ];
-
-   $params = [
-        'index' => 'test_index',
-        'body' => [
-            'query' => [
-
-                    ['match' => [
-                        '_id' => $doc_id
-                      ]
-                    ]
-
-                ]
-            ]
-    ];
-
-*/
 $params = [
   'index' => 'test_index',
   'id' => $doc_id
@@ -92,8 +39,33 @@ $params = [
   <div class="item">
     <div class="item-info">
       <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>
-      <div class="authors">Authors: <?php echo $data['contributor_author'];?></div>
-      <div class="publishers">Publisher: <?php echo $data['publisher'];?></div>
+      <div class="info-item"><span class="key">Authors: </span><?php echo $data['contributor_author'];?></div>
+      <div class="info-item"><span class="key">Publisher: </span><?php echo $data['publisher'];?></div>
+      <div class="info-item"><span class="key">University: </span><?php echo $data['degree_grantor'];?></div>
+      <div class="info-item"><span class="key">Department: </span><?php echo $data['contributor_department'];?></div>
+      <div class="info-item"><span class="key">Academic Field: </span><?php echo $data['contributor_department'];?></div>
+      <div class="info-item"><span class="key">Degree Level: </span><?php echo $data['degree_level'];?></div>
+      <div class="info-item">
+        <span class="key">Advisors: </span>
+        <?php
+          /*
+            Print advisors. it's in an array.
+          */
+          $advisors = $data['contributor_committeemember'];
+          $num_of_advisors = count($advisors);
+          $i = 0;
+          foreach ($advisors as $advisor) {
+            echo $advisor;
+            // If it's not the last one, print a comma
+            if($i++ == $num_of_advisors)
+            {
+              echo ", ";
+            }
+          }
+        ?>
+      </div>
+
+      <hr />
       <div class="desc">
           <?php
             if( !empty($data['description_abstract']) )
