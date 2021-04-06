@@ -45,7 +45,20 @@
   else
   {
     $_SESSION['user'] = $email;
-    header('Location: ../index.php');
+
+    // If there is a redirectPage and query are set => redirect there with the query as params
+    // - else => go to index
+    if( isset($_POST['redirectPage']) && isset($_POST['redirectquery']) )
+    {
+      echo $_POST['redirectPage'] . '.php?' . $_POST['redirectquery'];
+      header('Location: ../' . $_POST['redirectPage'] . '.php?' . $_POST['redirectquery']);
+    }
+    else
+    {
+      echo 'WHAT';
+      header('Location: ../index.php');
+    }
+
   }
 
 ?>

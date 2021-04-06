@@ -1,8 +1,11 @@
 <?php
-  if(!isset($_SESSION))
+  /*if(!isset($_SESSION))
   {
     session_start();
-  }
+  }*/
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <html></html>
@@ -16,7 +19,7 @@
   <script src="_jquery/jq.js"></script>
 </head>
 <body>
-  <div class="all-content login">
+  <div class="all-content login"> 
     <div class="content-wrap">
       <div class="logo-wrap"><a href="index.php">  <img src="_pics/logo.png" alt="Mr. Spock Logo"/></a></div><?php
   // If there are errors in the session
@@ -25,7 +28,12 @@
   if( isset($_SESSION['error']) )
   {
     $err_arr = $_SESSION['error'];
-    $email = $_SESSION['email'];
+
+    if( isset($_SESSION['email']) )
+    {
+      $email = $_SESSION['email'];
+    }
+
 ?>
   <div class="error-wrap">
     <?php
@@ -59,6 +67,21 @@
   <div class="bottom-row">
     <button type="submit">Login</button><a href="forgotpass.php" class="plain">Forgot Password?</a>
   </div>
+
+  <?php
+  /*
+    If a redirect is set => add hidden inputs holding that info
+  */
+  if( isset($_GET['redirectPage']) && isset($_GET['query']) )
+  {
+  ?>
+  <input type="hidden" name="redirectPage" value="<?php echo $_GET['redirectPage']; ?>" />
+  <input type="hidden" name="redirectquery" value="<?php echo $_GET['query']; ?>" />
+  <?php
+  }
+  ?>
+
+
 </form>
 
         <!--form.column(method="POST" action="login_action.php")

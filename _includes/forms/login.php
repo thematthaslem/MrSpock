@@ -12,4 +12,19 @@
   <div class="bottom-row">
     <button type="submit">Login</button><a href="forgotpass.php" class="plain">Forgot Password?</a>
   </div>
+
+  <?php
+  /*
+    If a redirect is set => add hidden inputs holding that info
+  */
+  if( isset($_GET['redirectPage']) && isset($_GET['query']) )
+  {
+  ?>
+  <input type="hidden" name="redirectPage" value="<?php echo $_GET['redirectPage']; ?>" />
+  <input type="hidden" name="redirectquery" value="<?php echo $_GET['query']; ?>" />
+  <?php
+  }
+  ?>
+
+
 </form>
