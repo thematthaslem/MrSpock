@@ -562,6 +562,9 @@ body.serp, body.page {
   padding: 4px 8px;
 }
 
+.all-content.page .main-content-wrap .results-wrap {
+  margin-bottom: 25px;
+}
 .all-content.page .main-content-wrap .results-wrap a.go-back-button {
   border-radius: 6px;
   background: #626c80;
@@ -586,6 +589,63 @@ body.serp, body.page {
 .all-content.page .main-content-wrap .results-wrap .item .item-info .desc {
   margin-left: 15px;
   margin-top: 15px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper {
+  width: min(70vw, 940px);
+  max-width: min(70vw, 940px);
+  padding: 50px;
+  background: white;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  border: solid 2px #272b33;
+  background: #93a2bf;
+  padding: 30px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form > *:not(h2, h3) {
+  margin-left: 15px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form input {
+  border: solid 1px #474747;
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 300px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form label {
+  margin-right: 20px;
+  margin-bottom: 8px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form .row {
+  margin-bottom: 15px;
+  margin-top: 12px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form h3 {
+  margin-top: 30px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form .button {
+  background: #626c80;
+  color: white;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form .button:hover {
+  background: #272b33;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form .button.active {
+  background: #ffb562;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form textarea {
+  height: 100px;
+  width: 350px;
+  margin-bottom: 20px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form #submit-claim {
+  background: #ffb562;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper form #submit-claim:hover {
+  background: #f5ab58;
 }
 
 input[type=text], input[type=password], input[type=email] {

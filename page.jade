@@ -1,17 +1,17 @@
 // output: page.php
-include _includes/issession.php
+include _includes/issession.php 
 html      
 head                       
   title Mr. Spock - Search Results            
-  link(rel="stylesheet", type="text/css", href="main.css")
+  link(rel="stylesheet", type="text/css", href="main.css")   
   include _jquery/scripts    
-body.page
-  .all-content.page
+body.page 
+  .all-content.page 
     include _includes/pages/page/top-bar.php  
     //.top-bar        
       .logo-wrap   
         img(src="_pics/logo.png" alt="Mr. Spock Logo") 
-      .search-wrap-all 
+      .search-wrap-all  
         form 
           .search-wrap
             input(type="text" name="search" placeholder="Explore new articles...")
@@ -29,12 +29,11 @@ body.page
                 label(for="publisher-input") Publisher:
                 input(type="text" id="publisher-input" name="publisher")
  
-    .main-content-wrap  
-      
-      .results-wrap         
-        include _includes/pages/page/results.php 
-        
-        //.items-wrap 
+    .main-content-wrap   
+           
+      .results-wrap             
+        include _includes/pages/page/results.php          
+        //.items-wrap  
           .item
             .item-info
               .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
@@ -49,4 +48,7 @@ body.page
               a(href="_files_dissertation/11042/ETDAppendixA.pdf")
                 .download-item
                   img(src="_pics/PDF_icon.svg")
-                  .title ETDAppendixA.pdf
+                  .title ETDAppendixA.pdf 
+    
+      include _includes/pages/page/claim.php
+ 

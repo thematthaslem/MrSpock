@@ -18,8 +18,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="_jquery/jq.js"></script>
 </head>
-<body class="page">
-  <div class="all-content page"><div class="top-bar">
+<body class="page"> 
+  <div class="all-content page"> <div class="top-bar">
   <a href="index.php">
     <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
   </a>
@@ -47,7 +47,7 @@
     <!--.top-bar        
     .logo-wrap   
       img(src="_pics/logo.png" alt="Mr. Spock Logo") 
-    .search-wrap-all 
+    .search-wrap-all  
       form 
         .search-wrap
           input(type="text" name="search" placeholder="Explore new articles...")
@@ -66,8 +66,8 @@
               input(type="text" id="publisher-input" name="publisher")
     
     -->
-    <div class="main-content-wrap"> 
-      <div class="results-wrap">        <?php
+    <div class="main-content-wrap">  
+      <div class="results-wrap">            <?php
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
@@ -105,7 +105,7 @@ $params = [
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
-  <a class="go-back-button button" href="#">< Back to Resultss</a>
+  <a class="go-back-button button" href="#">< Back to Results</a>
   <div class="item">
     <div class="item-info">
       <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>
@@ -190,7 +190,7 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap 
+        <!--.items-wrap  
         .item
           .item-info
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
@@ -205,9 +205,75 @@ $params = [
             a(href="_files_dissertation/11042/ETDAppendixA.pdf")
               .download-item
                 img(src="_pics/PDF_icon.svg")
-                .title ETDAppendixA.pdf
+                .title ETDAppendixA.pdf 
+        
         -->
-      </div>
+      </div><!--
+  The Make a new claim form
+-->
+<div class="new-claim-wrapper">
+  <h1>New Claim:</h1>
+<?php
+  /*
+    Check if user is logged in
+  */
+  $loggedin = false;
+  if( isset($_SESSION['user']) )
+  {
+    $loggedin = true;
+  }
+
+
+  /*
+    If the user is not logged in, give them a link to log in.
+  */
+  if( !($loggedin) )
+  {
+    // Need to get the query from url to pass to login.php so we can return after logging in.
+    $redirect_query = $_SERVER['QUERY_STRING'];
+
+    echo "
+      <a class=\"link\" href=\"login.php?redirectPage=page&query=$redirect_query\">Log in</a> to submit a claim.
+    ";
+  }
+  else
+  {
+?>
+
+<form id="new-claim" method="post" action="_php/send_claim_action.php">
+  <h2>Claim by <?php echo $_SESSION['user']; ?></h2>
+  <label for="name">Claim:</label>
+  <input type="text" name="name" />
+    <label for="reproduce">Can you reproduce this claim?</label>
+  <div class="row">
+    <a class="button reproduce-button">Yes</a>
+    <a class="button reproduce-button">No</a>
+    <a class="button reproduce-button">Partially</a>
+  </div>
+  <input name="reproduce" type="hidden" value="" />
+  <h3>Proof of experiments:</h3>
+  <label for="source-code">Source Code:</label>
+  <input name="source-code" type="text" />
+  <label for="datasets">Datasets:</label>
+  <input name="datasets" type="text" />
+  <label for="results">Experiments and Results</label>
+  <textarea name="results">
+
+  </textarea>
+
+  <a id="submit-claim" class="button">Submit</a>
+
+</form>
+
+<?php
+  }
+?>
+
+</div>
+<!--
+  Show claims
+-->
+
     </div>
   </div>
 </body>

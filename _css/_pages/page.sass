@@ -2,6 +2,7 @@
 .all-content.page
   .main-content-wrap
     .results-wrap
+      margin-bottom: 25px
       a.go-back-button
         border-radius: 6px
         background: $primary-light
@@ -27,3 +28,55 @@
           .desc
             margin-left: 15px
             margin-top: 15px
+
+    .new-claim-wrapper
+      width: min(70vw, 940px)
+      max-width: min(70vw, 940px)
+      padding: 50px
+      background: $white
+
+      form
+        @include flex(column, flex-start, flex-start, nowrap)
+        border: solid 2px $primary
+        background: $primary-lighter
+        padding: 30px
+
+        & > *:not(h2, h3)
+          margin-left: 15px
+
+        input
+          border: solid 1px $light-gray
+          padding: 10px
+          margin-bottom: 15px
+          width: 300px
+        label
+          margin-right: 20px
+          margin-bottom: 8px
+
+        .row
+          margin-bottom: 15px
+          margin-top: 12px
+
+        h3
+          margin-top: 30px
+
+        .button
+          background: $primary-light
+          color: $white
+
+          &:hover
+            background: $primary
+
+          &.active
+            background: $light-orange
+
+        textarea
+          height: 100px
+          width: 350px
+          margin-bottom: 20px
+
+        #submit-claim
+          background: $light-orange
+
+          &:hover
+            background: $orange
