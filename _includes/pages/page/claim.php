@@ -30,28 +30,37 @@
   {
 ?>
 
+<div class="message success">
+  Claim successfully submitted!
+</div>
+<div class="message fail">
+  Sorry! Something went wrong with submitting your claim.
+</div>
+
 <form id="new-claim" method="post" action="_php/send_claim_action.php">
+  <input type="hidden" name="art_id" value="<?php echo $_GET['id'];?>" />
   <h2>Claim by <?php echo $_SESSION['user']; ?></h2>
-  <label for="name">Claim:</label>
-  <input type="text" name="name" />
+  <input type="hidden" name="author" value="<?php echo $_SESSION['user']; ?>" />
+  <label for="title">Claim:</label>
+  <input type="text" name="title" required />
     <label for="reproduce">Can you reproduce this claim?</label>
   <div class="row">
-    <a class="button reproduce-button">Yes</a>
+    <a class="button reproduce-button active">Yes</a>
     <a class="button reproduce-button">No</a>
     <a class="button reproduce-button">Partially</a>
   </div>
-  <input name="reproduce" type="hidden" value="" />
+  <input name="reproduce" type="hidden" value="Yes" />
   <h3>Proof of experiments:</h3>
   <label for="source-code">Source Code:</label>
-  <input name="source-code" type="text" />
+  <input name="source-code" type="text" required />
   <label for="datasets">Datasets:</label>
-  <input name="datasets" type="text" />
+  <input name="datasets" type="text" required />
   <label for="results">Experiments and Results</label>
-  <textarea name="results">
+  <textarea name="results" required>
 
   </textarea>
 
-  <a id="submit-claim" class="button">Submit</a>
+  <button type="submit" id="submit-claim" class="button">Submit</button>
 
 </form>
 
@@ -63,3 +72,38 @@
 <!--
   Show claims
 -->
+<div class="claims-wrapper">
+  <h1>Claims:</h1>
+
+  <input id="art_id" type="hidden" value="<?php echo $_GET['id'];?>" />
+
+  <div class="claim-items-wrapper">
+    <div class="item-wrapper">
+      <div class="title">#1 - This is a Claim</div>
+      <div class="info">By: <span class="value">Matthew Haslem</span></div>
+      <div class="info">Can reproduce?: <span class="value">Partially</span></div>
+      <div class="info">Source Code: <span class="value">http://localhost:5601/app/dev_tools#/console</span></div>
+      <div class="info">Datasets: <span class="value">http://localhost:5601/app/dev_tools#/console</span></div>
+      <div class="info">
+        Results:
+        <p>
+          "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+        </p>
+      </div>
+    </div>
+    <div class="item-wrapper">
+      <div class="title">#1 - This is a Claim</div>
+      <div class="info">By: <span class="value">Matthew Haslem</span></div>
+      <div class="info">Can reproduce?: <span class="value">Partially</span></div>
+      <div class="info">Source Code: <span class="value">http://localhost:5601/app/dev_tools#/console</span></div>
+      <div class="info">Datasets: <span class="value">http://localhost:5601/app/dev_tools#/console</span></div>
+      <div class="info">
+        Results:
+        <p>
+          "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

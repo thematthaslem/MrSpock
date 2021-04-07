@@ -34,6 +34,24 @@
       max-width: min(70vw, 940px)
       padding: 50px
       background: $white
+      margin-bottom: 20px
+
+      .message
+        width: 100%
+        padding: 15px
+        font-size: 14px
+        color: $white
+        display: none
+
+        &.show
+          display: block
+          margin-bottom: 15px
+
+        &.success
+          background: rgba(52, 235, 140,1)
+
+        &.fail
+          background: $red
 
       form
         @include flex(column, flex-start, flex-start, nowrap)
@@ -80,3 +98,35 @@
 
           &:hover
             background: $orange
+
+
+    .claims-wrapper
+      width: min(70vw, 940px)
+      max-width: min(70vw, 940px)
+      padding: 50px
+      background: $white
+
+      .item-wrapper
+        padding: 30px
+        width: 100%
+        background-color: $white
+
+        &:nth-of-type(odd)
+          background-color: #e8eff7
+
+        .title
+          font-size: 18px
+          font-weight: bold
+          margin-bottom: 15px
+
+        .info
+          font-size: 14px
+          margin-bottom: 8px
+
+          .value
+            color: $primary-light
+
+          p
+            color: $primary
+            margin-left: 12px
+            font-style: oblique

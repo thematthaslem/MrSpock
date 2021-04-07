@@ -595,6 +595,24 @@ body.serp, body.page {
   max-width: min(70vw, 940px);
   padding: 50px;
   background: white;
+  margin-bottom: 20px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper .message {
+  width: 100%;
+  padding: 15px;
+  font-size: 14px;
+  color: white;
+  display: none;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper .message.show {
+  display: block;
+  margin-bottom: 15px;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper .message.success {
+  background: #34eb8c;
+}
+.all-content.page .main-content-wrap .new-claim-wrapper .message.fail {
+  background: #a30101;
 }
 .all-content.page .main-content-wrap .new-claim-wrapper form {
   display: flex;
@@ -646,6 +664,37 @@ body.serp, body.page {
 }
 .all-content.page .main-content-wrap .new-claim-wrapper form #submit-claim:hover {
   background: #f5ab58;
+}
+.all-content.page .main-content-wrap .claims-wrapper {
+  width: min(70vw, 940px);
+  max-width: min(70vw, 940px);
+  padding: 50px;
+  background: white;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper {
+  padding: 30px;
+  width: 100%;
+  background-color: white;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper:nth-of-type(odd) {
+  background-color: #e8eff7;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .info {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .info .value {
+  color: #626c80;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .info p {
+  color: #272b33;
+  margin-left: 12px;
+  font-style: oblique;
 }
 
 input[type=text], input[type=password], input[type=email] {
