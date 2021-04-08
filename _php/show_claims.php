@@ -23,7 +23,7 @@
     echo "
       <div class=\"item-wrapper\">
         <div class=\"title\">#$i - $title</div>
-        <div class=\"info\">By: <span class=\"value\">$author/span></div>
+        <div class=\"info\">By: <span class=\"value\">$author</span></div>
         <div class=\"info\">Can reproduce?: <span class=\"value\">$reproduce</span></div>
         <div class=\"info\">Source Code: <span class=\"value\">$source</span></div>
         <div class=\"info\">Datasets: <span class=\"value\">$datasets</span></div>

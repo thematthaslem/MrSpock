@@ -23,19 +23,48 @@
   /*
       Get search info
   */
-  $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+
+  // Search Query
+  if(isset($_GET['search']))
+  {
+    $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+  }
+  else {$search = "";}
+
+  // Author
+  if(isset($_GET['author']))
+  {
+    $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
+  }
+  else {$author = "";}
+
+  // Department
+  if(isset($_GET['department']))
+  {
+    $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
+  }
+  else {$department = "";}
+
+  // Publisher
+  if(isset($_GET['publisher']))
+  {
+    $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
+  }
+  else {$publisher = "";}
+
+  /*
   $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
   $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
   $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
-
-  // Handle the dates
+  */
+  // dates
   if(isset($_GET['from-date']) && !empty($_GET['from-date']))
   {
     $from_date = $_GET['from-date'];
   }
   else
   {
-    $from_date = "1000-01-01";
+    $from_date = "1000-01-01"; // Set it to a low number to give the search a wide range as default
   }
 
   if(isset($_GET['to-date']) && !empty($_GET['to-date']))
@@ -247,8 +276,8 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap   
-        .item
+        <!--.items-wrap    
+        .item  
           .item-info
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
             .desc 
