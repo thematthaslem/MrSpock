@@ -19,23 +19,52 @@
   <script src="_jquery/jq.js"></script>
 </head>
 <body class="serp">        
-  <div class="all-content serp">                        <?php
+  <div class="all-content serp">                         <?php
   /*
       Get search info
   */
-  $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+
+  // Search Query
+  if(isset($_GET['search']))
+  {
+    $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+  }
+  else {$search = "";}
+
+  // Author
+  if(isset($_GET['author']))
+  {
+    $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
+  }
+  else {$author = "";}
+
+  // Department
+  if(isset($_GET['department']))
+  {
+    $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
+  }
+  else {$department = "";}
+
+  // Publisher
+  if(isset($_GET['publisher']))
+  {
+    $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
+  }
+  else {$publisher = "";}
+
+  /*
   $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
   $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
   $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
-
-  // Handle the dates
+  */
+  // dates
   if(isset($_GET['from-date']) && !empty($_GET['from-date']))
   {
     $from_date = $_GET['from-date'];
   }
   else
   {
-    $from_date = "1000-01-01";
+    $from_date = "1000-01-01"; // Set it to a low number to give the search a wide range as default
   }
 
   if(isset($_GET['to-date']) && !empty($_GET['to-date']))
@@ -61,7 +90,7 @@
         <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
       </div>
       <div class="advanced-search-wrap">
-        <div class="link"><span class="open-advanced">Advanced Search</span></div>
+        <div class="link open-advanced-link"><span class="open-advanced">Advanced Search</span></div>
         <div class="advanced-search-items">
           <div class="items-wrap">
 
@@ -100,11 +129,11 @@
   </div>
 </div>
 
-    <!--.top-bar            
-    .logo-wrap            
+    <!--.top-bar                  
+    .logo-wrap             
       img(src="_pics/logo.png" alt="Mr. Spock Logo")            
-    .search-wrap-all        
-      form           
+    .search-wrap-all         
+      form            
         .search-wrap            
           input(type="text" name="search" placeholder="Explore new articles...")
           button(type="submit")
@@ -363,7 +392,7 @@
           <?php
             if( !empty($data['description_abstract']) )
             {
-              echo substr($data['description_abstract'],0,550);
+              echo substr(filter_var($data['description_abstract'], FILTER_SANITIZE_STRING),0,550);
             }
           ?>
           ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )
@@ -434,16 +463,25 @@
     // If number of pages is greater than 14, set it so it only shows 14 pages and a last
     $counter = 0;
 
-    for($i=1; $i<=$number_of_pages; $i++)
+    // Check if these numbers is a part of new set (1-14 is a set; 14-28 is a set;)
+    //   We just need the first number in set
+    //   - To find first of set we need to do (curr_page_number - mod13 + 1)
+    $start_of_set = $curr_page_number - ($curr_page_number % 13);
+    if($start_of_set == 0){$start_of_set = 1;}
+
+    for($i=$start_of_set; $i<=$number_of_pages; $i++)
     {
       // Set page number for current item
       $page_number = $i;
 
+
+
       //If there are 14 pages already => show last page button. Set to last page
-      if($counter > 13)
+      //if($counter > 13)
+      if($counter > 3 && ($page_number % 13) == 2)
       {
         $page_number = $number_of_pages;
-        $i = $number_of_pages;
+        $i = $number_of_pages; // This sets it as last page
         echo ' <div style="margin-right:8px;">...</div>';
       }
 

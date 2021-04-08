@@ -238,7 +238,7 @@
           <?php
             if( !empty($data['description_abstract']) )
             {
-              echo substr($data['description_abstract'],0,550);
+              echo substr(filter_var($data['description_abstract'], FILTER_SANITIZE_STRING),0,550);
             }
           ?>
           ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )

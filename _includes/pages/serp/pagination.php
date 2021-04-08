@@ -18,16 +18,25 @@
     // If number of pages is greater than 14, set it so it only shows 14 pages and a last
     $counter = 0;
 
-    for($i=1; $i<=$number_of_pages; $i++)
+    // Check if these numbers is a part of new set (1-14 is a set; 14-28 is a set;)
+    //   We just need the first number in set
+    //   - To find first of set we need to do (curr_page_number - mod13 + 1)
+    $start_of_set = $curr_page_number - ($curr_page_number % 13);
+    if($start_of_set == 0){$start_of_set = 1;}
+
+    for($i=$start_of_set; $i<=$number_of_pages; $i++)
     {
       // Set page number for current item
       $page_number = $i;
 
+
+
       //If there are 14 pages already => show last page button. Set to last page
-      if($counter > 13)
+      //if($counter > 13)
+      if($counter > 3 && ($page_number % 13) == 2)
       {
         $page_number = $number_of_pages;
-        $i = $number_of_pages;
+        $i = $number_of_pages; // This sets it as last page
         echo ' <div style="margin-right:8px;">...</div>';
       }
 
