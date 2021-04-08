@@ -25,6 +25,7 @@
   */
   $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
   $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
+  $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
   $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
 
 
@@ -46,6 +47,8 @@
           <div class="items-wrap">
             <label for="author-input">Author:</label>
             <input type="text" id="author-input" name="author" value="<?php echo $author; ?>"/>
+            <label for="department-input">Department:</label>
+            <input type="text" id="department-input" name="department" value="<?php echo $department; ?>"/>
             <label for="publisher-input">Publisher:</label>
             <input type="text" id="publisher-input" name="publisher" value="<?php echo $publisher; ?>"/>
           </div>
@@ -67,18 +70,18 @@
 </div>
 
     <!--.top-bar            
-    .logo-wrap         
-      img(src="_pics/logo.png" alt="Mr. Spock Logo")      
-    .search-wrap-all   
-      form  
-        .search-wrap  
+    .logo-wrap          
+      img(src="_pics/logo.png" alt="Mr. Spock Logo")           
+    .search-wrap-all     
+      form    
+        .search-wrap   
           input(type="text" name="search" placeholder="Explore new articles...")
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow")
     
         .advanced-search-wrap   
           .link 
-            span.open-advanced Advanced Search  
+            span.open-advanced Advanced Search   
            
           .advanced-search-items 
             .items-wrap
@@ -135,7 +138,9 @@
                   'must' => [
                     ['match' => [
                         'title' => [
-                           'query'     => $search
+                           'query'     => $search,
+                           'minimum_should_match' => '50%'
+                           //'operator' => 'and'
                            //'fuzziness' => '2'
                         ]
                       ]
@@ -149,8 +154,18 @@
                        ]
                      ],
                      ['match' => [
+                         'contributor_department' => [
+                           'query' => $department,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
                          'contributor_author' => [
                            'query' => $author,
+                           'operator' => 'and',
                            'zero_terms_query' => 'all',
                            'fuzziness' => '1'
                          ]

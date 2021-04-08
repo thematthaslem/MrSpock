@@ -403,7 +403,7 @@ body.serp, body.page {
   height: 170px;
 }
 .all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items.open, .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items.open {
-  min-height: 170px;
+  min-height: 300px;
 }
 .all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap, .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap {
   display: flex;

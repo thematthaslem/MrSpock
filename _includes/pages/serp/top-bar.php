@@ -4,6 +4,7 @@
   */
   $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
   $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
+  $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
   $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
 
 
@@ -25,6 +26,8 @@
           <div class="items-wrap">
             <label for="author-input">Author:</label>
             <input type="text" id="author-input" name="author" value="<?php echo $author; ?>"/>
+            <label for="department-input">Department:</label>
+            <input type="text" id="department-input" name="department" value="<?php echo $department; ?>"/>
             <label for="publisher-input">Publisher:</label>
             <input type="text" id="publisher-input" name="publisher" value="<?php echo $publisher; ?>"/>
           </div>

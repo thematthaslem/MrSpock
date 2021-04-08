@@ -44,7 +44,9 @@
                   'must' => [
                     ['match' => [
                         'title' => [
-                           'query'     => $search
+                           'query'     => $search,
+                           'minimum_should_match' => '50%'
+                           //'operator' => 'and'
                            //'fuzziness' => '2'
                         ]
                       ]
@@ -58,8 +60,18 @@
                        ]
                      ],
                      ['match' => [
+                         'contributor_department' => [
+                           'query' => $department,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
                          'contributor_author' => [
                            'query' => $author,
+                           'operator' => 'and',
                            'zero_terms_query' => 'all',
                            'fuzziness' => '1'
                          ]
