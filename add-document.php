@@ -10,7 +10,7 @@
 
 <html>     </html>
 <head>                      
-  <title>Mr. Spock - Search Results            </title>
+  <title>Mr. Spock - New Document            </title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -41,6 +41,17 @@
         </div>
       </div>
     </form>
+  </div>
+
+  <div class="nav-wrap">
+    <?php
+    if(isset($_SESSION['user']))
+    {
+    ?>
+    <a class="link" href="add-document.php">+ Add New Document</a>
+    <?php
+    }
+    ?>
   </div>
 </div>
 

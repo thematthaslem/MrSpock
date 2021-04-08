@@ -10,7 +10,7 @@
 
 <html></html>
 <head>
-  <title>Mr. Spock</title>
+  <title>Mr. Spock - Reset Password</title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -61,7 +61,7 @@
 </form>
 
         <!--form.column(method="POST" action="_php/resetpass_action.php")
-        input(type="password" name="pass1" placeholder="password")
+        input(type="password" name="pass1" placeholder="password") 
         input(type="password" name="pass1" placeholder="re-enter password")
         button(type="submit")
           | Reset Pass

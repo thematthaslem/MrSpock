@@ -10,7 +10,7 @@
 
 <html> </html>
 <head>
-  <title>Mr. Spock</title>
+  <title>Mr. Spock - Register</title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

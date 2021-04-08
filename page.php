@@ -10,7 +10,7 @@
 
 <html>       </html>
 <head>                      
-  <title>Mr. Spock - Search Results            </title>
+  <title>Mr. Spock - Page           </title>
   <link rel="stylesheet" type="text/css" href="main.css"/>
   <script src="_jquery/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
