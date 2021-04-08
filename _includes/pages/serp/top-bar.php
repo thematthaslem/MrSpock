@@ -7,6 +7,25 @@
   $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
   $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
 
+  // Handle the dates
+  if(isset($_GET['from-date']) && !empty($_GET['from-date']))
+  {
+    $from_date = $_GET['from-date'];
+  }
+  else
+  {
+    $from_date = "1000-01-01";
+  }
+
+  if(isset($_GET['to-date']) && !empty($_GET['to-date']))
+  {
+    $to_date = $_GET['to-date'];
+  }
+  else
+  {
+    $to_date = "9999-12-30";
+  }
+
 
 ?>
 
@@ -15,7 +34,7 @@
     <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
   </a>
   <div class="search-wrap-all">
-    <form>
+    <form method="get" action="serp.php">
       <div class="search-wrap">
         <input type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
         <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
@@ -24,12 +43,24 @@
         <div class="link"><span class="open-advanced">Advanced Search</span></div>
         <div class="advanced-search-items">
           <div class="items-wrap">
+
             <label for="author-input">Author:</label>
             <input type="text" id="author-input" name="author" value="<?php echo $author; ?>"/>
+
             <label for="department-input">Department:</label>
             <input type="text" id="department-input" name="department" value="<?php echo $department; ?>"/>
+
             <label for="publisher-input">Publisher:</label>
             <input type="text" id="publisher-input" name="publisher" value="<?php echo $publisher; ?>"/>
+
+            <label for="date" class="date-range">Date Range:</label>
+            <div class="row">
+              From: <input type="date" name="from-date" value="<?php echo $from_date; ?>" />
+              To: <input type="date" name="to-date" value="<?php echo $to_date; ?>" />
+            </div>
+            <button type="submit">Search</button>
+
+
           </div>
         </div>
       </div>

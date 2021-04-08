@@ -46,6 +46,7 @@ $params = [
       <div class="info-item"><span class="key">Department: </span><?php echo $data['contributor_department'];?></div>
       <div class="info-item"><span class="key">Academic Field: </span><?php echo $data['contributor_department'];?></div>
       <div class="info-item"><span class="key">Degree Level: </span><?php echo $data['degree_level'];?></div>
+      <div class="info-item"><span class="key">Date Issued: </span><?php echo $data['date_issued']; ?></div>
       <div class="info-item">
         <span class="key">Advisors: </span>
         <?php

@@ -30,6 +30,7 @@
     SEARCH AND FILTER
   */
 
+/*
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -40,6 +41,68 @@
            'size' => $page_size,
            'query' => [
               'bool' => [
+
+                  'must' => [
+                    ['match' => [
+                        'title' => [
+                           'query'     => $search,
+                           'minimum_should_match' => '50%'
+                           //'operator' => 'and'
+                           //'fuzziness' => '2'
+                        ]
+                      ]
+                    ],
+                     ['match' => [
+                         'publisher' => [
+                           'query' => $publisher,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_department' => [
+                           'query' => $department,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_author' => [
+                           'query' => $author,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ]
+                  ]
+               ],
+           ],
+        ]
+   ];
+*/
+
+  $params = [
+       'index' => 'test_index',
+       'body' => [
+           'sort' => [
+               '_score'
+           ],
+           'from' => $start_of_results,
+           'size' => $page_size,
+           'query' => [
+              'bool' => [
+                  'filter' => [
+                    'range' => [
+                      'date_issued' => [
+                        'gte' => $from_date,
+                        'lte' => $to_date
+                      ]
+                    ]
+                  ],
 
                   'must' => [
                     ['match' => [
@@ -123,46 +186,6 @@
      ];
   */
 
-  /*
-     $params = [
-          'index' => 'test_index',
-          'body' => [
-              'sort' => [
-                  '_score'
-              ],
-              'query' => [
-                 'bool' => [
-                     'should' => [
-                          ['match' => [
-                              'title' => [
-                                 'query'     => $search
-                                 //'fuzziness' => '2'
-                              ]
-                            ]
-                          ],
-                          ['match' => [
-                              'publisher' => [
-                                'query' => $publisher,
-                                'zero_terms_query' => 'all',
-                                'fuzziness' => '1'
-                              ]
-                            ]
-                          ],
-                          ['match' => [
-                              'contributor_author' => [
-                                'query' => $author,
-                                'zero_terms_query' => 'all',
-                                'fuzziness' => '1'
-                              ]
-                            ]
-                          ]
-                     ]
-                  ],
-              ],
-           ]
-      ];
-  */
-
 
   $response = $client->search($params);
   $item_count = $response['hits']['total']['value'];
@@ -208,7 +231,7 @@
 ?>
   <div class="item">
     <div class="item-info">
-      <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>
+      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $data['title'];?></a></div>
       <div class="authors">Authors: <?php echo $data['contributor_author'];?></div>
       <div class="publishers">Publisher: <?php echo $data['publisher'];?></div>
       <div class="desc">
@@ -218,7 +241,7 @@
               echo substr($data['description_abstract'],0,550);
             }
           ?>
-          ( <a href="page.php?id=<?php echo $item_id; ?>">Read More</a> )
+          ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )
       </div>
     </div>
     <div class="downloads-wrap">

@@ -68,7 +68,7 @@
             <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
           </div>
           <div class="advanced-search-wrap">
-            <div class="link"><span class="open-advanced">Advanced Search </span></div>
+            <div class="link"><span class="open-advanced">Advanced Search   </span></div>
             <div class="advanced-search-items">
               <label for="author-input">Author:</label>
               <input type="text" id="author-input" name="author"/>
@@ -76,6 +76,11 @@
               <input type="text" id="department-input" name="department"/>
               <label for="publisher-input">Publisher:</label>
               <input type="text" id="publisher-input" name="publisher"/>
+              <label for="date" class="date-range">Date Range:</label>
+              <div class="row">From: 
+                <input type="date" name="from-date"/>To: 
+                <input type="date" name="to-date"/>
+              </div>
             </div>
           </div>
         </form>

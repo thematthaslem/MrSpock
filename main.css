@@ -415,8 +415,21 @@ body.serp, body.page {
 .all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap label, .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap label {
   margin-bottom: 4px;
 }
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap label.date-range, .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap label.date-range {
+  margin-bottom: 8px;
+}
 .all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap input:not(:last-child), .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap input:not(:last-child) {
   margin-bottom: 8px;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap button, .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap button {
+  padding: 8px 10px;
+  font-size: 12px;
+  background: #93a2bf;
+  margin-top: 12px;
+}
+.all-content.serp .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap button:hover, .all-content.page .top-bar .search-wrap-all form .advanced-search-wrap .advanced-search-items .items-wrap button:hover {
+  background: #93a2bf;
+  text-decoration: underline;
 }
 .all-content.serp .top-bar .nav-wrap, .all-content.page .top-bar .nav-wrap {
   width: 100%;

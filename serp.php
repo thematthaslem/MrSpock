@@ -19,7 +19,7 @@
   <script src="_jquery/jq.js"></script>
 </head>
 <body class="serp">        
-  <div class="all-content serp">                       <?php
+  <div class="all-content serp">                        <?php
   /*
       Get search info
   */
@@ -27,6 +27,25 @@
   $author = filter_var($_GET['author'], FILTER_SANITIZE_STRING);
   $department = filter_var($_GET['department'], FILTER_SANITIZE_STRING);
   $publisher = filter_var($_GET['publisher'], FILTER_SANITIZE_STRING);
+
+  // Handle the dates
+  if(isset($_GET['from-date']) && !empty($_GET['from-date']))
+  {
+    $from_date = $_GET['from-date'];
+  }
+  else
+  {
+    $from_date = "1000-01-01";
+  }
+
+  if(isset($_GET['to-date']) && !empty($_GET['to-date']))
+  {
+    $to_date = $_GET['to-date'];
+  }
+  else
+  {
+    $to_date = "9999-12-30";
+  }
 
 
 ?>
@@ -36,7 +55,7 @@
     <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
   </a>
   <div class="search-wrap-all">
-    <form>
+    <form method="get" action="serp.php">
       <div class="search-wrap">
         <input type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
         <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
@@ -45,12 +64,24 @@
         <div class="link"><span class="open-advanced">Advanced Search</span></div>
         <div class="advanced-search-items">
           <div class="items-wrap">
+
             <label for="author-input">Author:</label>
             <input type="text" id="author-input" name="author" value="<?php echo $author; ?>"/>
+
             <label for="department-input">Department:</label>
             <input type="text" id="department-input" name="department" value="<?php echo $department; ?>"/>
+
             <label for="publisher-input">Publisher:</label>
             <input type="text" id="publisher-input" name="publisher" value="<?php echo $publisher; ?>"/>
+
+            <label for="date" class="date-range">Date Range:</label>
+            <div class="row">
+              From: <input type="date" name="from-date" value="<?php echo $from_date; ?>" />
+              To: <input type="date" name="to-date" value="<?php echo $to_date; ?>" />
+            </div>
+            <button type="submit">Search</button>
+
+
           </div>
         </div>
       </div>
@@ -70,18 +101,18 @@
 </div>
 
     <!--.top-bar            
-    .logo-wrap          
-      img(src="_pics/logo.png" alt="Mr. Spock Logo")           
-    .search-wrap-all     
-      form    
-        .search-wrap   
+    .logo-wrap            
+      img(src="_pics/logo.png" alt="Mr. Spock Logo")            
+    .search-wrap-all        
+      form           
+        .search-wrap            
           input(type="text" name="search" placeholder="Explore new articles...")
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow")
     
         .advanced-search-wrap   
           .link 
-            span.open-advanced Advanced Search   
+            span.open-advanced Advanced Search    
            
           .advanced-search-items 
             .items-wrap
@@ -124,6 +155,7 @@
     SEARCH AND FILTER
   */
 
+/*
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -134,6 +166,68 @@
            'size' => $page_size,
            'query' => [
               'bool' => [
+
+                  'must' => [
+                    ['match' => [
+                        'title' => [
+                           'query'     => $search,
+                           'minimum_should_match' => '50%'
+                           //'operator' => 'and'
+                           //'fuzziness' => '2'
+                        ]
+                      ]
+                    ],
+                     ['match' => [
+                         'publisher' => [
+                           'query' => $publisher,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_department' => [
+                           'query' => $department,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_author' => [
+                           'query' => $author,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ]
+                  ]
+               ],
+           ],
+        ]
+   ];
+*/
+
+  $params = [
+       'index' => 'test_index',
+       'body' => [
+           'sort' => [
+               '_score'
+           ],
+           'from' => $start_of_results,
+           'size' => $page_size,
+           'query' => [
+              'bool' => [
+                  'filter' => [
+                    'range' => [
+                      'date_issued' => [
+                        'gte' => $from_date,
+                        'lte' => $to_date
+                      ]
+                    ]
+                  ],
 
                   'must' => [
                     ['match' => [
@@ -217,46 +311,6 @@
      ];
   */
 
-  /*
-     $params = [
-          'index' => 'test_index',
-          'body' => [
-              'sort' => [
-                  '_score'
-              ],
-              'query' => [
-                 'bool' => [
-                     'should' => [
-                          ['match' => [
-                              'title' => [
-                                 'query'     => $search
-                                 //'fuzziness' => '2'
-                              ]
-                            ]
-                          ],
-                          ['match' => [
-                              'publisher' => [
-                                'query' => $publisher,
-                                'zero_terms_query' => 'all',
-                                'fuzziness' => '1'
-                              ]
-                            ]
-                          ],
-                          ['match' => [
-                              'contributor_author' => [
-                                'query' => $author,
-                                'zero_terms_query' => 'all',
-                                'fuzziness' => '1'
-                              ]
-                            ]
-                          ]
-                     ]
-                  ],
-              ],
-           ]
-      ];
-  */
-
 
   $response = $client->search($params);
   $item_count = $response['hits']['total']['value'];
@@ -302,7 +356,7 @@
 ?>
   <div class="item">
     <div class="item-info">
-      <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>
+      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $data['title'];?></a></div>
       <div class="authors">Authors: <?php echo $data['contributor_author'];?></div>
       <div class="publishers">Publisher: <?php echo $data['publisher'];?></div>
       <div class="desc">
@@ -312,7 +366,7 @@
               echo substr($data['description_abstract'],0,550);
             }
           ?>
-          ( <a href="page.php?id=<?php echo $item_id; ?>">Read More</a> )
+          ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )
       </div>
     </div>
     <div class="downloads-wrap">
