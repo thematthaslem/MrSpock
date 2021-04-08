@@ -35,7 +35,11 @@
 
 <div class="user-info-wrap">
   <div class="user-info"><img src="_pics/user.png" class="user-pic"/><a href="editinfo.php"><span class="username"><?php echo $_SESSION['user']; ?></span></a><a class="button dropdown"><img src="_pics/drop_arrow.svg" alt="dropdown arrow"/></a></div>
-  <div class="user-options-wrap"><a href="editinfo.php">Edit Info</a><a href="_php/logout.php">Logout</a></div>
+  <div class="user-options-wrap">
+    <a href="editinfo.php">Edit Info</a>
+    <a href="add-document.php">Add New Document</a>
+    <a href="_php/logout.php">Logout</a>
+  </div>
 </div>
 
 
@@ -48,7 +52,7 @@
     .user-info
       img(class="user-pic" src="_pics/user.png")
       span.username TheMattHaslem
-      a.button.dropdown
+      a.button.dropdown 
         img(src="_pics/drop_arrow.svg" alt="dropdown arrow")
     .user-options-wrap
       a(href="editinfo.php") Edit Info

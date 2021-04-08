@@ -42,9 +42,20 @@
       </div>
     </form>
   </div>
+
+  <div class="nav-wrap">
+    <?php
+    if(isset($_SESSION['user']))
+    {
+    ?>
+    <a class="link" href="add-document.php">+ Add New Document</a>
+    <?php
+    }
+    ?>
+  </div>
 </div>
 
-    <!--.top-bar        
+    <!--.top-bar         
     .logo-wrap   
       img(src="_pics/logo.png" alt="Mr. Spock Logo") 
     .search-wrap-all  

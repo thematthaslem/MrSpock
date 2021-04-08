@@ -21,4 +21,15 @@
       </div>
     </form>
   </div>
+
+  <div class="nav-wrap">
+    <?php
+    if(isset($_SESSION['user']))
+    {
+    ?>
+    <a class="link" href="add-document.php">+ Add New Document</a>
+    <?php
+    }
+    ?>
+  </div>
 </div>

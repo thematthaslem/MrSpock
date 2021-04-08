@@ -697,6 +697,54 @@ body.serp, body.page {
   font-style: oblique;
 }
 
+.all-content.serp .main-content-wrap.add-document .results-wrap .message-wrap {
+  width: 100%;
+  padding: 20px;
+  font-size: 12px;
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .message-wrap.Success {
+  background: #34eb8c;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .message-wrap.Error {
+  background: #a30101;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .message-wrap h3 {
+  color: white;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .message-wrap .item {
+  width: 100%;
+  margin-bottom: 8px;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form label {
+  margin-bottom: 8px;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form input, .all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form textarea {
+  border: solid 1px rgba(127, 127, 127, 0.6);
+  padding: 8px;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form input:not(:last-child), .all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form textarea:not(:last-child) {
+  margin-bottom: 16px;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form input[type=text], .all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form textarea[type=text] {
+  width: 50%;
+}
+.all-content.serp .main-content-wrap.add-document .results-wrap .new-document-form-wrap form textarea {
+  width: 50%;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
 input[type=text], input[type=password], input[type=email] {
   outline: none;
   padding: 12px;

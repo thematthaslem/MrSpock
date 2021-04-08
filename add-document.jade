@@ -1,0 +1,64 @@
+// output: add-document.php
+include _includes/issession.php
+html      
+head                       
+  title Mr. Spock - Search Results            
+  link(rel="stylesheet", type="text/css", href="main.css")
+  include _jquery/scripts      
+body.serp         
+  .all-content.serp                         
+    include _includes/pages/page/top-bar.php      
+ 
+    .main-content-wrap.add-document
+      .results-wrap   
+         
+        include _includes/pages/add_document/messages.php   
+        h1 New Document
+        .new-document-form-wrap
+          form(method="POST" id="new-document" action="_php/new_document_action.php" enctype="multipart/form-data")
+            label(for="title") Title:
+            input(type="text" name="title" required)
+            
+            label(for="contributor_author") Contributor Author:
+            input(type="text" name="contributor_author" required)
+            
+            label(for="contributor_committeechair") Contributor Committee Chair:
+            input(type="text" name="contributor_committeechair" required)
+            
+            label(for="contributor_committeemember") Contributor Committee Members:
+            input(type="text" name="contributor_committeemember" placeholder="Seperate by comma" required)
+            
+            label(for="contributor_department") Contributor Department: 
+            input(type="text" name="contributor_department" required)
+            
+            label(for="date") Date Issued:
+            input(type="date" name="date" required)
+            
+            label(for="degree_grantor") Degree Grantor:
+            input(type="text" name="degree_grantor" required) 
+            
+            label(for="degree_level") Degree Level:
+            input(type="text" name="degree_level" value="doctoral" required) 
+            
+            label(for="description_abstract") Description Abstract:
+            textarea(name="description_abstract" required)
+            
+            label(for="description_degree") Description Degree:
+            input(type="text"  name="description_degree" required)
+            
+            label(for="description_provenance") Description Provenance:
+            input(type="text"  name="description_provenance" placeholder="Seperate by comma" required)
+            
+            label(for="publisher") Publisher:
+            input(type="text"  name="publisher" value="Virginia Tech")
+            
+            label(for="subject") Subject:
+            input(type="text" name="subject" placeholder="Seperate by comma" required)
+            
+            label(for="identifier_sourceurl") Identifier Source URL:
+            input(type="text" name="identifier_sourceurl" required)
+            
+            label(for="relation_haspart") File (PDF):
+            input(type="file" name="relation_haspart" required)
+
+            button(type="submit") Submit Document
