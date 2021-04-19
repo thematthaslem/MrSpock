@@ -144,23 +144,30 @@ p {
   margin-right: 15px;
 }
 .all-content.index .user-info-wrap .user-options-wrap {
+  background: #313640;
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 0px;
+}
+.all-content.index .user-info-wrap .user-options-wrap.open {
+  max-height: 1000px;
+}
+.all-content.index .user-info-wrap .user-options-wrap .user-options-buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  background: #313640;
-  padding: 12px;
-  border-radius: 12px;
+  margin: 12px;
 }
-.all-content.index .user-info-wrap .user-options-wrap a {
-  width: 100px;
+.all-content.index .user-info-wrap .user-options-wrap .user-options-buttons a {
+  width: 100%;
   text-align: right;
   padding: 10px;
   color: #93a2bf;
   border-radius: 6px;
 }
-.all-content.index .user-info-wrap .user-options-wrap a:hover {
+.all-content.index .user-info-wrap .user-options-wrap .user-options-buttons a:hover {
   background-color: #626c80;
 }
 .all-content.index .content-wrap {
@@ -833,8 +840,10 @@ a.button.outline:hover {
 }
 a.button.dropdown {
   border-radius: 50px;
-  background-color: #1e1e1e;
   padding: 10px;
+}
+a.button.dropdown.open {
+  background-color: #1e1e1e;
 }
 a.button.dropdown:hover {
   background-color: #3c3c3c;

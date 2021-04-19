@@ -28,20 +28,27 @@
         margin-right: 15px
 
     .user-options-wrap
-      @include flex(column, flex-start, flex-start, nowrap)
       background: $primary-light-accent
-      padding: 12px
       border-radius: 12px
+      overflow: hidden
+      max-height: 0px
 
-      a
-        width: 100px
-        text-align: right
-        padding: 10px
-        color: $primary-lighter
-        border-radius: 6px
+      &.open
+        max-height: 1000px
 
-        &:hover
-          background-color: $primary-light
+      .user-options-buttons
+        @include flex(column, flex-start, flex-start, nowrap)
+        margin: 12px
+
+        a
+          width: 100%
+          text-align: right
+          padding: 10px
+          color: $primary-lighter
+          border-radius: 6px
+
+          &:hover
+            background-color: $primary-light
 
 
 
@@ -107,7 +114,7 @@
 
       &.open
         max-height: 100%
-        padding: 25px 
+        padding: 25px
         border-width: 6px
 
       input[type="text"]

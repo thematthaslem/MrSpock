@@ -19,5 +19,4 @@ $('body').click(function(evt){
 
       //Do processing of click event here for every element except with id menu_content
       $('.advanced-search-items').removeClass('open');
-      console.log('nice' + $(evt.target).attr('class'));
 });
