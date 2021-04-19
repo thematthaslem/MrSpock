@@ -140,12 +140,12 @@
           button(type="submit")
             img(src="_pics/search_arrow.svg" alt="search arrow") 
     
-        .advanced-search-wrap         
-          .link        
-            span.open-advanced Advanced Search        
-                
-          .advanced-search-items     
-            .items-wrap  
+        .advanced-search-wrap            
+          .link             
+            span.open-advanced Advanced Search              
+                  
+          .advanced-search-items          
+            .items-wrap     
               label(for="author-input") Author:  
               input(type="text" id="author-input" name="author")
               label(for="publisher-input") Publisher: 
@@ -336,7 +336,16 @@ THIS ONE
                     ['match' => [
                         'title' => [
                            'query'     => $search,
-                           'minimum_should_match' => '50%'
+                           'minimum_should_match' => '90%'
+                           //'operator' => 'and'
+                           //'fuzziness' => '2'
+                        ]
+                      ]
+                    ],
+                    ['match' => [
+                        'description_abstract' => [
+                           'query'     => $search,
+                           'minimum_should_match' => '90%',
                            //'operator' => 'and'
                            //'fuzziness' => '2'
                         ]
@@ -380,6 +389,10 @@ THIS ONE
                       "post_tags" => ["</span>"]
                     ],
                     "publisher" => [
+                      "pre_tags" => ["<span class=\"highlight\">"],
+                      "post_tags" => ["</span>"]
+                    ],
+                    "description_abstract" => [
                       "pre_tags" => ["<span class=\"highlight\">"],
                       "post_tags" => ["</span>"]
                     ],
@@ -480,6 +493,9 @@ THIS ONE
 ?>
   <div class="item">
 
+  <!--
+    FAVORITE BUTTON
+  -->
     <?php
     /*
       Only show favorite button if user is logged in
@@ -502,21 +518,60 @@ THIS ONE
           data-title="<?php echo $data['title'];?>"
           data-date="<?php echo $data['date_issued']; ?>"
           data-author="<?php echo $data['contributor_author'];?>"
-      src="_pics/fav.svg" />
+          src="_pics/fav.svg" />
     </div>
     <?php
     }
     ?>
 
+
+    <!--
+      Item info
+    -->
+    <?php
+    /*
+      For highlighting, We need to make sure the highlighted items actually exist in return results
+        - If it doesn't exist, we need to show plain returned text
+    */
+
+    $title = $data['title'];
+    if(isset($item['highlight']['title'][0]))
+    {
+      $title = $item['highlight']['title'][0];
+    }
+
+    $contributor_author = $data['contributor_author'];
+    if(isset($item['highlight']['contributor_author'][0]))
+    {
+      $contributor_author = $item['highlight']['contributor_author'][0];
+    }
+
+    $publisher = $data['publisher'];
+    if(isset($item['highlight']['publisher'][0]))
+    {
+      $publisher = $item['highlight']['publisher'][0];
+    }
+
+    $description_abstract = $data['description_abstract'];
+    if(isset($item['highlight']['description_abstract'][0]))
+    {
+      $description_abstract = $item['highlight']['description_abstract'][0];
+    }
+
+    ?>
     <div class="item-info">
-      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $item['highlight']['title'][0];?></a></div>
-      <div class="authors">Authors: <?php echo $data['contributor_author'];?></div>
-      <div class="publishers">Publisher: <?php echo $data['publisher'];?></div>
+      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $title;?></a></div>
+      <div class="authors">Authors: <?php echo $contributor_author;?></div>
+      <div class="publishers">Publisher: <?php echo $publisher;?></div>
       <div class="desc">
           <?php
             if( !empty($data['description_abstract']) )
             {
-              echo substr(filter_var($data['description_abstract'], FILTER_SANITIZE_STRING),0,550);
+              //echo substr(filter_var($description_abstract, FILTER_SANITIZE_STRING),0,550);
+
+              // Let's user strip_tags instead of 'filter_var' so we can keep the highlight span
+              echo substr(strip_tags($description_abstract, '<span>'),0,550);
+              //echo $description_abstract;
             }
           ?>
           ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )
