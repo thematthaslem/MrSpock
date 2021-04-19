@@ -1,0 +1,39 @@
+// Most of the styles come from 'edit-info.sass'
+
+.favorites-wrap
+  @include flex(column, flex-start, flex-start, nowrap)
+  width: 80%
+
+  .item
+    @include flex(row, center, flex-start, nowrap)
+    padding: 15px 25px
+    background: $white
+    width: 100%
+
+
+    &:not(:last-child)
+      border-bottom: solid 1px $lighter-gray-opac
+
+    .favorite-button
+      @include transition(150ms)
+      width: 20px
+      margin-right: 20px
+      cursor: pointer
+
+      &:hover
+        opacity: 0.7
+
+    a
+      &:hover
+        .title
+          text-decoration: underline
+
+    .title
+      font-size: 16px
+      color: $primary
+
+    .author
+      color: $primary-lighter
+
+    .date
+      font-style: oblique

@@ -101,6 +101,7 @@
     if(isset($_SESSION['user']))
     {
     ?>
+    <a class="link" href="favorites.php">My Favorites</a>
     <a class="link" href="add-document.php">+ Add New Document</a>
     <?php
     }

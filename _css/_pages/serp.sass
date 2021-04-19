@@ -79,6 +79,9 @@ body.serp, body.page
       text-align: right
       padding-right: 50px
 
+      a:not(:last-child)
+        margin-right: 15px
+
   .main-content-wrap
     @include flex(column, center, center, nowrap)
     padding: 40px 0
@@ -101,6 +104,24 @@ body.serp, body.page
 
           &:nth-child(odd)
             background-color: #e8eff7
+
+          span.highlight
+            background: rgba(245, 241, 132, 1)
+
+          .favorite-wrap
+            margin-right: 20px
+
+            img
+              @include transition(150ms)
+              width: 30px
+              opacity: 0.2
+              cursor: pointer
+
+              &:hover, &.selected:hover
+                opacity: 1
+              &.selected
+                opacity: 0.8
+
 
           .item-info
             @include flex(column, flex-start, flex-start, nowrap)

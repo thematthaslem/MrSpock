@@ -1,7 +1,4 @@
 <?php
-  require '_php/functions_get.php';
-  require '_php/connect.php';
-
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
@@ -88,10 +85,6 @@
    ];
 */
 
-
-/*
-THIS ONE
-
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -150,91 +143,6 @@ THIS ONE
                   ]
                ],
            ],
-        ]
-   ];
-*/
-
-
-/*
-  WITH HIGHLIGH
-*/
-  $params = [
-       'index' => 'test_index',
-       'body' => [
-           'sort' => [
-               '_score'
-           ],
-           'from' => $start_of_results,
-           'size' => $page_size,
-           'query' => [
-              'bool' => [
-                  'filter' => [
-                    'range' => [
-                      'date_issued' => [
-                        'gte' => $from_date,
-                        'lte' => $to_date
-                      ]
-                    ]
-                  ],
-
-                  'must' => [
-                    ['match' => [
-                        'title' => [
-                           'query'     => $search,
-                           'minimum_should_match' => '50%'
-                           //'operator' => 'and'
-                           //'fuzziness' => '2'
-                        ]
-                      ]
-                    ],
-                     ['match' => [
-                         'publisher' => [
-                           'query' => $publisher,
-                           'zero_terms_query' => 'all',
-                           'fuzziness' => '1'
-                         ]
-                       ]
-                     ],
-                     ['match' => [
-                         'contributor_department' => [
-                           'query' => $department,
-                           'operator' => 'and',
-                           'zero_terms_query' => 'all',
-                           'fuzziness' => '1'
-                         ]
-                       ]
-                     ],
-                     ['match' => [
-                         'contributor_author' => [
-                           'query' => $author,
-                           'operator' => 'and',
-                           'zero_terms_query' => 'all',
-                           'fuzziness' => '1'
-                         ]
-                       ]
-                     ]
-                  ]
-               ],
-           ],
-           "highlight" => [
-                "pre_tags" => ["<b>"],
-                "post_tags" => ["</b>"],
-                "fields" => [
-                    "title" => [
-                      "pre_tags" => ["<span class=\"highlight\">"],
-                      "post_tags" => ["</span>"]
-                    ],
-                    "publisher" => [
-                      "pre_tags" => ["<span class=\"highlight\">"],
-                      "post_tags" => ["</span>"]
-                    ],
-                    "contributor_author" => [
-                      "pre_tags" => ["<span class=\"highlight\">"],
-                      "post_tags" => ["</span>"]
-                    ]
-                ],
-                "force_source" => true
-            ]
         ]
    ];
 
@@ -283,8 +191,6 @@ THIS ONE
   $item_count = $response['hits']['total']['value'];
   $items = $response['hits']['hits'];
 
-
-
   /*
    Calculate the number of pages
     - There are 10 results per page.
@@ -313,8 +219,8 @@ THIS ONE
 <div class="items-wrap">
 <?php
   foreach ($items as $item) {
+    //print_r($item);
     $data = $item['_source'];
-
     if(isset($data['relation_haspart']))
     {
       $downloads = $data['relation_haspart'];
@@ -324,24 +230,13 @@ THIS ONE
                                 // It's like the folder name it came from
 ?>
   <div class="item">
-
     <?php
-    /*
-      Only show favorite button if user is logged in
-      - If it's already favorited -> give it class selected
-    */
-    $selected = "";
     if(isset($_SESSION['user']))
     {
-      $favorite_item = get_favorite($item_id);
-      if(sizeof($favorite_item) > 0)
-      {
-        $selected = " selected";
-      }
     ?>
     <div class="favorite-wrap">
       <!-- The favorite button. Holds all data needed to enter it into database -->
-      <img class="favorite-button <?php echo $selected; ?>"
+      <img class="favorite-button"
           data-id="<?php echo $item_id; ?>"
           data-user="<?php echo $_SESSION['user'];?>"
           data-title="<?php echo $data['title'];?>"
@@ -354,7 +249,7 @@ THIS ONE
     ?>
 
     <div class="item-info">
-      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $item['highlight']['title'][0];?></a></div>
+      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $data['title'];?></a></div>
       <div class="authors">Authors: <?php echo $data['contributor_author'];?></div>
       <div class="publishers">Publisher: <?php echo $data['publisher'];?></div>
       <div class="desc">

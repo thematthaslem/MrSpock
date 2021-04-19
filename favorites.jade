@@ -1,0 +1,23 @@
+//output: favorites.php
+include _includes/issession.php
+html  
+head   
+  title Mr. Spock - Edit Info  
+  link(rel="stylesheet", type="text/css", href="main.css")  
+  include _jquery/scripts       
+body  
+  .all-content.edit-info  
+    .left-bar
+      .logo-wrap 
+        img(src="_pics/logo.png" alt="Mr. Spock Logo")   
+      .nav-wrap
+        .nav-links
+          a(href="index.php") Home 
+          a(href="editinfo.php") Edit Info 
+          a(href="_php/logout.php") Logout 
+    .content-wrap
+      h1 My Favorites: 
+      include _includes/pages/favorites/favorites_list.php
+      
+
+        

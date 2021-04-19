@@ -122,6 +122,7 @@
     if(isset($_SESSION['user']))
     {
     ?>
+    <a class="link" href="favorites.php">My Favorites</a>
     <a class="link" href="add-document.php">+ Add New Document</a>
     <?php
     }
@@ -137,22 +138,25 @@
         .search-wrap            
           input(type="text" name="search" placeholder="Explore new articles...")
           button(type="submit")
-            img(src="_pics/search_arrow.svg" alt="search arrow")
+            img(src="_pics/search_arrow.svg" alt="search arrow") 
     
-        .advanced-search-wrap   
-          .link 
-            span.open-advanced Advanced Search    
-           
-          .advanced-search-items 
-            .items-wrap
-              label(for="author-input") Author: 
+        .advanced-search-wrap         
+          .link        
+            span.open-advanced Advanced Search        
+                
+          .advanced-search-items     
+            .items-wrap  
+              label(for="author-input") Author:  
               input(type="text" id="author-input" name="author")
               label(for="publisher-input") Publisher: 
-              input(type="text" id="publisher-input" name="publisher") 
+              input(type="text" id="publisher-input" name="publisher")  
     
     -->
     <div class="main-content-wrap"> 
-      <div class="results-wrap">   <?php
+      <div class="results-wrap">    <?php
+  require '_php/functions_get.php';
+  require '_php/connect.php';
+
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
@@ -239,6 +243,10 @@
    ];
 */
 
+
+/*
+THIS ONE
+
   $params = [
        'index' => 'test_index',
        'body' => [
@@ -299,6 +307,91 @@
            ],
         ]
    ];
+*/
+
+
+/*
+  WITH HIGHLIGH
+*/
+  $params = [
+       'index' => 'test_index',
+       'body' => [
+           'sort' => [
+               '_score'
+           ],
+           'from' => $start_of_results,
+           'size' => $page_size,
+           'query' => [
+              'bool' => [
+                  'filter' => [
+                    'range' => [
+                      'date_issued' => [
+                        'gte' => $from_date,
+                        'lte' => $to_date
+                      ]
+                    ]
+                  ],
+
+                  'must' => [
+                    ['match' => [
+                        'title' => [
+                           'query'     => $search,
+                           'minimum_should_match' => '50%'
+                           //'operator' => 'and'
+                           //'fuzziness' => '2'
+                        ]
+                      ]
+                    ],
+                     ['match' => [
+                         'publisher' => [
+                           'query' => $publisher,
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_department' => [
+                           'query' => $department,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ],
+                     ['match' => [
+                         'contributor_author' => [
+                           'query' => $author,
+                           'operator' => 'and',
+                           'zero_terms_query' => 'all',
+                           'fuzziness' => '1'
+                         ]
+                       ]
+                     ]
+                  ]
+               ],
+           ],
+           "highlight" => [
+                "pre_tags" => ["<b>"],
+                "post_tags" => ["</b>"],
+                "fields" => [
+                    "title" => [
+                      "pre_tags" => ["<span class=\"highlight\">"],
+                      "post_tags" => ["</span>"]
+                    ],
+                    "publisher" => [
+                      "pre_tags" => ["<span class=\"highlight\">"],
+                      "post_tags" => ["</span>"]
+                    ],
+                    "contributor_author" => [
+                      "pre_tags" => ["<span class=\"highlight\">"],
+                      "post_tags" => ["</span>"]
+                    ]
+                ],
+                "force_source" => true
+            ]
+        ]
+   ];
 
 
   /*
@@ -345,6 +438,8 @@
   $item_count = $response['hits']['total']['value'];
   $items = $response['hits']['hits'];
 
+
+
   /*
    Calculate the number of pages
     - There are 10 results per page.
@@ -373,8 +468,8 @@
 <div class="items-wrap">
 <?php
   foreach ($items as $item) {
-    //print_r($item);
     $data = $item['_source'];
+
     if(isset($data['relation_haspart']))
     {
       $downloads = $data['relation_haspart'];
@@ -384,8 +479,37 @@
                                 // It's like the folder name it came from
 ?>
   <div class="item">
+
+    <?php
+    /*
+      Only show favorite button if user is logged in
+      - If it's already favorited -> give it class selected
+    */
+    $selected = "";
+    if(isset($_SESSION['user']))
+    {
+      $favorite_item = get_favorite($item_id);
+      if(sizeof($favorite_item) > 0)
+      {
+        $selected = " selected";
+      }
+    ?>
+    <div class="favorite-wrap">
+      <!-- The favorite button. Holds all data needed to enter it into database -->
+      <img class="favorite-button <?php echo $selected; ?>"
+          data-id="<?php echo $item_id; ?>"
+          data-user="<?php echo $_SESSION['user'];?>"
+          data-title="<?php echo $data['title'];?>"
+          data-date="<?php echo $data['date_issued']; ?>"
+          data-author="<?php echo $data['contributor_author'];?>"
+      src="_pics/fav.svg" />
+    </div>
+    <?php
+    }
+    ?>
+
     <div class="item-info">
-      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $data['title'];?></a></div>
+      <div class="title"><a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>"><?php echo $item['highlight']['title'][0];?></a></div>
       <div class="authors">Authors: <?php echo $data['contributor_author'];?></div>
       <div class="publishers">Publisher: <?php echo $data['publisher'];?></div>
       <div class="desc">
