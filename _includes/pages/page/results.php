@@ -1,4 +1,7 @@
 <?php
+  require '_php/functions_get.php';
+  require '_php/connect.php';
+
   require 'vendor/autoload.php';
   $client = Elasticsearch\ClientBuilder::create()->build();
 
@@ -37,6 +40,47 @@ $params = [
                                 // It's like the folder name it came from
 ?>
   <a class="go-back-button button" href="#">< Back to Results</a>
+
+
+
+  <!--
+    FAVORITE BUTTON
+  -->
+  <?php
+  /*
+    Only show favorite button if user is logged in
+    - If it's already favorited -> give it class selected
+  */
+  $selected = "";
+  if(isset($_SESSION['user']))
+  {
+    $favorite_item = get_favorite($_GET['id']);
+    if(sizeof($favorite_item) > 0)
+    {
+      $selected = "selected";
+    }
+  ?>
+  <a class="button favorite-button page-button <?php echo $selected; ?>"
+      data-id="<?php echo $_GET['id']; ?>"
+      data-user="<?php echo $_SESSION['user'];?>"
+      data-title="<?php echo $data['title'];?>"
+      data-date="<?php echo $data['date_issued']; ?>"
+      data-author="<?php echo $data['contributor_author'];?>"
+      href="#">
+
+      <?php if($selected == "selected") { ?>
+      <div class="image-placeholder"></div> <span>Remove From Favorites</span>
+      <?php }
+      else {?>
+      <div class="image-placeholder"></div> <span>Add to Favorites</span>
+      <?php }?>
+  </a>
+  <?php
+  }
+  ?>
+
+
+
   <div class="item">
     <div class="item-info">
       <div class="title"><a href="page.php?id=<?php echo $item_id; ?>"><?php echo $data['title'];?></a></div>

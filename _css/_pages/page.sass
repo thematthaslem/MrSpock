@@ -3,7 +3,7 @@
   .main-content-wrap
     .results-wrap
       margin-bottom: 25px
-      a.go-back-button
+      a.go-back-button, a.favorite-button
         border-radius: 6px
         background: $primary-light
         color: $white
@@ -11,6 +11,27 @@
 
         &:hover
           text-decoration: underline
+
+      a.favorite-button
+        @include flex(row, center, center, nowrap)
+        font-size: 11px
+        padding: 5px 10px
+        background: $white
+        color: $light-gray
+        border: solid 3px $light-gray
+        margin: 15px 0
+
+        .image-placeholder
+          width: 15px
+          height: 15px
+          background-image: url('_pics/fav.svg')
+          background-size: contain
+          margin-right: 12px
+
+        &.selected
+          .image-placeholder
+            background-image: url('_pics/x.svg')
+
 
       .item
         .item-info

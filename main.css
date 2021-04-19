@@ -606,14 +606,37 @@ body.serp, body.page {
 .all-content.page .main-content-wrap .results-wrap {
   margin-bottom: 25px;
 }
-.all-content.page .main-content-wrap .results-wrap a.go-back-button {
+.all-content.page .main-content-wrap .results-wrap a.go-back-button, .all-content.page .main-content-wrap .results-wrap a.favorite-button {
   border-radius: 6px;
   background: #626c80;
   color: white;
   align-self: flex-start;
 }
-.all-content.page .main-content-wrap .results-wrap a.go-back-button:hover {
+.all-content.page .main-content-wrap .results-wrap a.go-back-button:hover, .all-content.page .main-content-wrap .results-wrap a.favorite-button:hover {
   text-decoration: underline;
+}
+.all-content.page .main-content-wrap .results-wrap a.favorite-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  font-size: 11px;
+  padding: 5px 10px;
+  background: white;
+  color: #474747;
+  border: solid 3px #474747;
+  margin: 15px 0;
+}
+.all-content.page .main-content-wrap .results-wrap a.favorite-button .image-placeholder {
+  width: 15px;
+  height: 15px;
+  background-image: url("_pics/fav.svg");
+  background-size: contain;
+  margin-right: 12px;
+}
+.all-content.page .main-content-wrap .results-wrap a.favorite-button.selected .image-placeholder {
+  background-image: url("_pics/x.svg");
 }
 .all-content.page .main-content-wrap .results-wrap .item .item-info {
   color: #333333;

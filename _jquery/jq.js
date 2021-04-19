@@ -80,7 +80,23 @@ $('.favorite-button').on('click', function(e){
         {
           var itemWrapper = favButton.closest('.item');
           itemWrapper.remove();
-          console.log('niceeeee' + itemWrapper.attr('class'));
+        }
+
+        // If the button has class 'page-button' -> Change text in button
+        // - this is for the page.php. it goes from "Add to favorites" to "Remove from favorites"
+        if( favButton.hasClass('page-button') )
+        {
+          var itemText = favButton.find('span');
+
+          if( favButton.hasClass('selected') )
+          {
+            itemText.text('Remove From Favorites');
+          }
+          else
+          {
+            itemText.text('Add to Favorites');
+          }
+
         }
 
       }
