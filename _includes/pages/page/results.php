@@ -39,8 +39,18 @@ $params = [
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
-  <a class="go-back-button button" href="#">< Back to Results</a>
 
+  <!--
+    Go Back button
+  -->
+  <?php
+    if(isset($_GET['search']))
+    {
+  ?>
+  <a class="go-back-button button" href="#">< Back to Results</a>
+  <?php
+    }
+  ?>
 
 
   <!--

@@ -86,7 +86,11 @@
   <div class="search-wrap-all">
     <form method="get" action="serp.php">
       <div class="search-wrap">
-        <input type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
+        <input id="search_input" type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
+        <div class="mic-wrap">
+          <img id="microphone"  src="//i.imgur.com/cHidSVu.gif" />
+        </div>
+
         <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
       </div>
       <div class="advanced-search-wrap">
@@ -194,8 +198,18 @@ $params = [
     $handle = $data['handle'];  // This is the identifier for the item
                                 // It's like the folder name it came from
 ?>
-  <a class="go-back-button button" href="#">< Back to Results</a>
 
+  <!--
+    Go Back button
+  -->
+  <?php
+    if(isset($_GET['search']))
+    {
+  ?>
+  <a class="go-back-button button" href="#">< Back to Results</a>
+  <?php
+    }
+  ?>
 
 
   <!--
@@ -321,9 +335,9 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap          
+        <!--.items-wrap           
         .item           
-          .item-info           
+          .item-info            
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
             .desc 
               | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.

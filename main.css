@@ -390,7 +390,17 @@ body.serp, body.page {
 }
 .all-content.serp .top-bar .search-wrap-all form .search-wrap input[type=text], .all-content.page .top-bar .search-wrap-all form .search-wrap input[type=text] {
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 6px 0 0 6px;
+  margin-right: 0px;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap .mic-wrap, .all-content.page .top-bar .search-wrap-all form .search-wrap .mic-wrap {
+  background-color: white;
+  border-radius: 0 6px 6px 0;
+  margin-right: 12px;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap .mic-wrap img, .all-content.page .top-bar .search-wrap-all form .search-wrap .mic-wrap img {
+  width: 31px;
+  cursor: pointer;
 }
 .all-content.serp .top-bar .search-wrap-all form .search-wrap button[type=submit], .all-content.page .top-bar .search-wrap-all form .search-wrap button[type=submit] {
   cursor: pointer;

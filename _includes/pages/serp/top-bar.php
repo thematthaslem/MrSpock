@@ -65,7 +65,11 @@
   <div class="search-wrap-all">
     <form method="get" action="serp.php">
       <div class="search-wrap">
-        <input type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
+        <input id="search_input" type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
+        <div class="mic-wrap">
+          <img id="microphone"  src="//i.imgur.com/cHidSVu.gif" />
+        </div>
+
         <button type="submit"><img src="_pics/search_arrow.svg" alt="search arrow"/></button>
       </div>
       <div class="advanced-search-wrap">
