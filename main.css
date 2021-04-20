@@ -723,12 +723,6 @@ body.serp, body.page {
   width: 350px;
   margin-bottom: 20px;
 }
-.all-content.page .main-content-wrap .new-claim-wrapper form #submit-claim {
-  background: #ffb562;
-}
-.all-content.page .main-content-wrap .new-claim-wrapper form #submit-claim:hover {
-  background: #f5ab58;
-}
 .all-content.page .main-content-wrap .claims-wrapper {
   width: min(70vw, 940px);
   max-width: min(70vw, 940px);
@@ -743,7 +737,79 @@ body.serp, body.page {
 .all-content.page .main-content-wrap .claims-wrapper .item-wrapper:nth-of-type(odd) {
   background-color: #e8eff7;
 }
-.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .title {
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote #submit-claim {
+  background: #ffb562;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote #submit-claim:hover {
+  background: #f5ab58;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: auto;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .votes {
+  padding: 5px;
+  font-size: 10px;
+  background-color: #626c80;
+  color: white;
+  margin-right: 12px;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.not-logged-in {
+  cursor: not-allowed;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.upvote {
+  margin-right: 12px;
+  background-image: url("_pics/upvote.svg");
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.upvote:hover, .all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.upvote.selected {
+  background-image: url("_pics/green_thumb.svg");
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.upvote .count {
+  background-color: #328b00;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.downvote {
+  background-image: url("_pics/downvote.svg");
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.downvote:hover, .all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.downvote.selected {
+  background-image: url("_pics/red_thumb.svg");
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button.downvote .count {
+  background-color: #d01c00;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .vote-buttons-wrap .vote-button .count {
+  position: absolute;
+  top: 30px;
+  width: 25px;
+  padding: 2px;
+  border-radius: 6px;
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  font-size: 8px;
+}
+.all-content.page .main-content-wrap .claims-wrapper .item-wrapper .row.title-upvote .title {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;

@@ -153,7 +153,7 @@
     
     -->
     <div class="main-content-wrap">    
-      <div class="results-wrap">             <?php
+      <div class="results-wrap">              <?php
   require '_php/functions_get.php';
   require '_php/connect.php';
 
@@ -321,9 +321,9 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap     
-        .item        
-          .item-info   
+        <!--.items-wrap          
+        .item           
+          .item-info           
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
             .desc 
               | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
@@ -403,6 +403,9 @@ $params = [
 
   <button type="submit" id="submit-claim" class="button">Submit</button>
 
+
+
+
 </form>
 
 <?php
@@ -433,7 +436,29 @@ $params = [
       </div>
     </div>
     <div class="item-wrapper">
-      <div class="title">#1 - This is a Claim</div>
+      <div class="row">
+        <div class="title">#1 - This is a Claim</div>
+
+        <!--
+          VOTE BUTTONS
+          - only allow voting if user is logged in
+          - disable voting by adding class 'not-logged-in'
+        -->
+        <?php
+          $notLoggedIn = "";
+          if( !(isset($_SESSION['user'])) )
+          {
+            $notLoggedIn = "not-logged-in";
+          }
+          ?>
+          <div class="vote-buttons-wrap">
+            <div class="votes">130</div>
+            <div class="vote-button upvote <?php echo $notLoggedIn; ?>"><div class="count">65</div></div>
+            <div class="vote-button downvote <?php echo $notLoggedIn; ?>"><div class="count">65</div></div>
+          </div>
+          
+      </div>
+
       <div class="info">By: <span class="value">Matthew Haslem</span></div>
       <div class="info">Can reproduce?: <span class="value">Partially</span></div>
       <div class="info">Source Code: <span class="value">http://localhost:5601/app/dev_tools#/console</span></div>

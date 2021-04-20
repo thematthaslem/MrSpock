@@ -62,6 +62,9 @@
 
   <button type="submit" id="submit-claim" class="button">Submit</button>
 
+
+
+
 </form>
 
 <?php
@@ -92,7 +95,29 @@
       </div>
     </div>
     <div class="item-wrapper">
-      <div class="title">#1 - This is a Claim</div>
+      <div class="row">
+        <div class="title">#1 - This is a Claim</div>
+
+        <!--
+          VOTE BUTTONS
+          - only allow voting if user is logged in
+          - disable voting by adding class 'not-logged-in'
+        -->
+        <?php
+          $notLoggedIn = "";
+          if( !(isset($_SESSION['user'])) )
+          {
+            $notLoggedIn = "not-logged-in";
+          }
+          ?>
+          <div class="vote-buttons-wrap">
+            <div class="votes">130</div>
+            <div class="vote-button upvote <?php echo $notLoggedIn; ?>"><div class="count">65</div></div>
+            <div class="vote-button downvote <?php echo $notLoggedIn; ?>"><div class="count">65</div></div>
+          </div>
+          
+      </div>
+
       <div class="info">By: <span class="value">Matthew Haslem</span></div>
       <div class="info">Can reproduce?: <span class="value">Partially</span></div>
       <div class="info">Source Code: <span class="value">http://localhost:5601/app/dev_tools#/console</span></div>
