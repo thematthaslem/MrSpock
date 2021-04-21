@@ -103,6 +103,24 @@ body.serp, body.page
       max-width: min(70vw, 940px)
       width: min(70vw, 940px)
 
+      .did-you-mean-wrap
+        margin-bottom: 20px
+        .first
+          margin-bottom: 12px
+
+        .all-suggestions
+          padding: 15px
+          border: solid 1px $light-gray-opac
+          margin-top: 8px
+          line-height: 1.6em
+
+          a
+            margin-right: 5px
+            font-style: oblique
+            &:nth-child(even)
+              color: #93a2b1
+
+
       .items-wrap
         @include flex(column, center, flex-start, nowrap)
 

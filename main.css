@@ -471,6 +471,25 @@ body.serp, body.page {
   max-width: min(70vw, 940px);
   width: min(70vw, 940px);
 }
+.all-content.serp .main-content-wrap .results-wrap .did-you-mean-wrap, .all-content.page .main-content-wrap .results-wrap .did-you-mean-wrap {
+  margin-bottom: 20px;
+}
+.all-content.serp .main-content-wrap .results-wrap .did-you-mean-wrap .first, .all-content.page .main-content-wrap .results-wrap .did-you-mean-wrap .first {
+  margin-bottom: 12px;
+}
+.all-content.serp .main-content-wrap .results-wrap .did-you-mean-wrap .all-suggestions, .all-content.page .main-content-wrap .results-wrap .did-you-mean-wrap .all-suggestions {
+  padding: 15px;
+  border: solid 1px rgba(127, 127, 127, 0.6);
+  margin-top: 8px;
+  line-height: 1.6em;
+}
+.all-content.serp .main-content-wrap .results-wrap .did-you-mean-wrap .all-suggestions a, .all-content.page .main-content-wrap .results-wrap .did-you-mean-wrap .all-suggestions a {
+  margin-right: 5px;
+  font-style: oblique;
+}
+.all-content.serp .main-content-wrap .results-wrap .did-you-mean-wrap .all-suggestions a:nth-child(even), .all-content.page .main-content-wrap .results-wrap .did-you-mean-wrap .all-suggestions a:nth-child(even) {
+  color: #93a2b1;
+}
 .all-content.serp .main-content-wrap .results-wrap .items-wrap, .all-content.page .main-content-wrap .results-wrap .items-wrap {
   display: flex;
   flex-direction: column;
