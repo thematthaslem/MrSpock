@@ -26,7 +26,7 @@
         <div class="nav-links"><a href="index.php">Home </a><a href="editinfo.php">Edit Info </a><a href="_php/logout.php">Logout </a></div>
       </div>
     </div>
-    <div class="content-wrap">
+    <div class="content-wrap favorites">
       <h1>My Favorites: </h1><div class="favorites-wrap">
 
 <?php

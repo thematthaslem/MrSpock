@@ -1,8 +1,14 @@
 // Most of the styles come from 'edit-info.sass'
-
+.all-content.edit-info
+  .content-wrap.favorites
+    padding-top: 10vh
+    padding-bottom: 10vh
+    overflow: auto
+    justify-content: flex-start
 .favorites-wrap
   @include flex(column, flex-start, flex-start, nowrap)
   width: 80%
+  border-radius: 12px
 
   .item
     @include flex(row, center, flex-start, nowrap)
@@ -10,6 +16,10 @@
     background: $white
     width: 100%
 
+    &:first-child
+      border-radius: 12px 12px 0 0
+    &:last-child
+      border-radius: 0 0 12px 12px
 
     &:not(:last-child)
       border-bottom: solid 1px $lighter-gray-opac

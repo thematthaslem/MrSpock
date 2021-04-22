@@ -904,6 +904,13 @@ body.serp, body.page {
   margin-bottom: 16px;
 }
 
+.all-content.edit-info .content-wrap.favorites {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  overflow: auto;
+  justify-content: flex-start;
+}
+
 .favorites-wrap {
   display: flex;
   flex-direction: column;
@@ -911,6 +918,7 @@ body.serp, body.page {
   justify-content: flex-start;
   flex-wrap: nowrap;
   width: 80%;
+  border-radius: 12px;
 }
 .favorites-wrap .item {
   display: flex;
@@ -921,6 +929,12 @@ body.serp, body.page {
   padding: 15px 25px;
   background: white;
   width: 100%;
+}
+.favorites-wrap .item:first-child {
+  border-radius: 12px 12px 0 0;
+}
+.favorites-wrap .item:last-child {
+  border-radius: 0 0 12px 12px;
 }
 .favorites-wrap .item:not(:last-child) {
   border-bottom: solid 1px rgba(190, 190, 190, 0.6);
