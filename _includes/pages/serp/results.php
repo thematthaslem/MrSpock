@@ -615,14 +615,18 @@ THIS ONE
           ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )
       </div>
     </div>
-    <div class="downloads-wrap">
-      <h3>Downloads:</h3>
+
       <?php
         /*
           We need to check if there are documents loaded
         */
-        if(isset($downloads))
+        if(isset($downloads) && !empty($downloads))
         {
+      ?>
+      <div class="downloads-wrap">
+        <h3>Downloads:</h3>
+
+        <?php
         /*
           We need to check if it's an array.
             - If is_array -> we need to print each item in the array
@@ -631,32 +635,36 @@ THIS ONE
         if( is_array($downloads) )
         {
           foreach ($downloads as $download) {
-      ?>
-      <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
-        <div class="download-item">
-          <img src="_pics/PDF_icon.svg"/>
-          <div class="title"><?php echo $download;//substr($download,0,16); ?></div>
-        </div>
-      </a>
-      <?php
+        ?>
+        <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
+          <div class="download-item">
+            <img src="_pics/PDF_icon.svg"/>
+            <div class="title"><?php echo $download;//substr($download,0,16); ?></div>
+          </div>
+        </a>
+        <?php
           }
         }
         else
         {
-      ?>
-      <a href="_files_dissertation/<?php echo "$handle/$downloads";?>" target="_blank">
-        <div class="download-item">
-          <img src="_pics/PDF_icon.svg"/>
-          <div class="title"><?php echo $downloads; //substr($downloads,0,16); ?></div>
-        </div>
-      </a>
+        ?>
+        <a href="_files_dissertation/<?php echo "$handle/$downloads";?>" target="_blank">
+          <div class="download-item">
+            <img src="_pics/PDF_icon.svg"/>
+            <div class="title"><?php echo $downloads; //substr($downloads,0,16); ?></div>
+          </div>
+        </a>
       <?php
         }
       ?>
     </div>
-  </div>
+
     <?php
       }
-    }
     ?>
+    </div>
+    <?php
+    } // foreach item end
+    ?>
+
 </div>

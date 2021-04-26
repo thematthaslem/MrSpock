@@ -145,13 +145,13 @@
             img(src="_pics/search_arrow.svg" alt="search arrow") 
       
         .advanced-search-wrap                
-          .link                                 
-            span.open-advanced Advanced Search                                  
-                                           
-          .advanced-search-items                                     
-            .items-wrap                               
+          .link                                  
+            span.open-advanced Advanced Search                                   
+                                                
+          .advanced-search-items                                         
+            .items-wrap                                  
               label(for="author-input") Author:            
-              input(type="text" id="author-input" name="author")   
+              input(type="text" id="author-input" name="author")     
               label(for="publisher-input") Publisher: 
               input(type="text" id="publisher-input" name="publisher")    
     
@@ -774,14 +774,18 @@ THIS ONE
           ( <a href="page.php?id=<?php echo $item_id . '&' . $_SERVER['QUERY_STRING']; ?>">Read More</a> )
       </div>
     </div>
-    <div class="downloads-wrap">
-      <h3>Downloads:</h3>
+
       <?php
         /*
           We need to check if there are documents loaded
         */
-        if(isset($downloads))
+        if(isset($downloads) && !empty($downloads))
         {
+      ?>
+      <div class="downloads-wrap">
+        <h3>Downloads:</h3>
+
+        <?php
         /*
           We need to check if it's an array.
             - If is_array -> we need to print each item in the array
@@ -790,34 +794,38 @@ THIS ONE
         if( is_array($downloads) )
         {
           foreach ($downloads as $download) {
-      ?>
-      <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
-        <div class="download-item">
-          <img src="_pics/PDF_icon.svg"/>
-          <div class="title"><?php echo $download;//substr($download,0,16); ?></div>
-        </div>
-      </a>
-      <?php
+        ?>
+        <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
+          <div class="download-item">
+            <img src="_pics/PDF_icon.svg"/>
+            <div class="title"><?php echo $download;//substr($download,0,16); ?></div>
+          </div>
+        </a>
+        <?php
           }
         }
         else
         {
-      ?>
-      <a href="_files_dissertation/<?php echo "$handle/$downloads";?>" target="_blank">
-        <div class="download-item">
-          <img src="_pics/PDF_icon.svg"/>
-          <div class="title"><?php echo $downloads; //substr($downloads,0,16); ?></div>
-        </div>
-      </a>
+        ?>
+        <a href="_files_dissertation/<?php echo "$handle/$downloads";?>" target="_blank">
+          <div class="download-item">
+            <img src="_pics/PDF_icon.svg"/>
+            <div class="title"><?php echo $downloads; //substr($downloads,0,16); ?></div>
+          </div>
+        </a>
       <?php
         }
       ?>
     </div>
-  </div>
+
     <?php
       }
-    }
     ?>
+    </div>
+    <?php
+    } // foreach item end
+    ?>
+
 </div>
 <!-- <h3 class="txt-center">More results:</h3>-->
 <div class="pagination-wrap">
