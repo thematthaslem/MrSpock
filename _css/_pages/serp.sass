@@ -35,9 +35,28 @@ body.serp, body.page
             margin-right: 0px
 
           .mic-wrap
+            position: relative
             background-color: $white
             border-radius: 0 6px 6px 0
             margin-right: 12px
+
+            &.active
+              .mic-active
+                animation-play-state: running
+                border: 3px solid $red
+
+            .mic-active
+              position: absolute
+              width: 40px
+              height: 40px
+              //border: 3px solid $red
+              border-radius: 100px
+              top: 50%
+              left: 50%
+              transform: translate(-50%, -50%)
+              animation: micActive 1200ms forwards infinite
+              animation-play-state: paused
+
             img
               width: 31px
               cursor: pointer
@@ -253,3 +272,14 @@ body.serp, body.page
           color: $primary-light
           cursor: default
           padding: 4px 8px
+
+
+@keyframes micActive
+  from
+    height: 0px
+    width: 0px
+    opacity: 0.7
+  to
+    height: 40px
+    width: 40px
+    opacity: 0

@@ -84,10 +84,11 @@
     <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
   </a>
   <div class="search-wrap-all">
-    <form method="get" action="serp.php">
+    <form id="search-form" method="get" action="serp.php">
       <div class="search-wrap">
         <input id="search_input" type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
         <div class="mic-wrap">
+          <div class="mic-active"></div>
           <img id="microphone"  src="//i.imgur.com/cHidSVu.gif" />
         </div>
 
@@ -344,7 +345,7 @@ $params = [
           .item-info               
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
             .desc 
-              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
           .downloads-wrap
             
             a(href="_files_dissertation/11042/ETDAppendixA.pdf")

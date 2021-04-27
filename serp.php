@@ -84,10 +84,11 @@
     <div class="logo-wrap"><img src="_pics/logo.png" alt="Mr. Spock Logo"/></div>
   </a>
   <div class="search-wrap-all">
-    <form method="get" action="serp.php">
+    <form id="search-form" method="get" action="serp.php">
       <div class="search-wrap">
         <input id="search_input" type="text" name="search" placeholder="Explore new articles..." value="<?php echo $search;?>"/>
         <div class="mic-wrap">
+          <div class="mic-active"></div>
           <img id="microphone"  src="//i.imgur.com/cHidSVu.gif" />
         </div>
 
@@ -146,8 +147,8 @@
       
         .advanced-search-wrap                
           .link                                  
-            span.open-advanced Advanced Search                                   
-                                                
+            span.open-advanced Advanced Search                                    
+                                                 
           .advanced-search-items                                         
             .items-wrap                                  
               label(for="author-input") Author:            

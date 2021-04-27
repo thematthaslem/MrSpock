@@ -126,12 +126,16 @@ function startDictation() {
       recognition.onresult = function(e) {
         document.getElementById('search_input').value
                                  = e.results[0][0].transcript;
+       $('.mic-wrap').removeClass('active');
         recognition.stop();
-        document.getElementById('labnol').submit();
+
+        document.getElementById('search-form').submit();
+
       };
 
       recognition.onerror = function(e) {
         recognition.stop();
+        $('.mic-wrap').removeClass('active');
       }
 
     }
@@ -140,6 +144,8 @@ function startDictation() {
 
 $('#microphone').on('click', function(e){
   startDictation();
+  $('.mic-wrap').addClass('active');
+  setTimeout(function(){ $('.mic-wrap').removeClass('active'); }, 6000);
 });
 var backButton = $('.go-back-button');
 backButton.on('click', function(){
@@ -317,4 +323,4 @@ $(document).on('click', '.vote-button', function() {
     }
   )
 });
-});                      
+});                         

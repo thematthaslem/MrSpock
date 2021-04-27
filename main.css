@@ -394,9 +394,25 @@ body.serp, body.page {
   margin-right: 0px;
 }
 .all-content.serp .top-bar .search-wrap-all form .search-wrap .mic-wrap, .all-content.page .top-bar .search-wrap-all form .search-wrap .mic-wrap {
+  position: relative;
   background-color: white;
   border-radius: 0 6px 6px 0;
   margin-right: 12px;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap .mic-wrap.active .mic-active, .all-content.page .top-bar .search-wrap-all form .search-wrap .mic-wrap.active .mic-active {
+  animation-play-state: running;
+  border: 3px solid #a30101;
+}
+.all-content.serp .top-bar .search-wrap-all form .search-wrap .mic-wrap .mic-active, .all-content.page .top-bar .search-wrap-all form .search-wrap .mic-wrap .mic-active {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: micActive 1200ms forwards infinite;
+  animation-play-state: paused;
 }
 .all-content.serp .top-bar .search-wrap-all form .search-wrap .mic-wrap img, .all-content.page .top-bar .search-wrap-all form .search-wrap .mic-wrap img {
   width: 31px;
@@ -649,6 +665,18 @@ body.serp, body.page {
   padding: 4px 8px;
 }
 
+@keyframes micActive {
+  from {
+    height: 0px;
+    width: 0px;
+    opacity: 0.7;
+  }
+  to {
+    height: 40px;
+    width: 40px;
+    opacity: 0;
+  }
+}
 .all-content.page .main-content-wrap .results-wrap {
   margin-bottom: 25px;
 }
