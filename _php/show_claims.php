@@ -10,7 +10,12 @@
   $notLoggedIn = "";
   if( !(isset($_SESSION['user'])) )
   {
+    $user = "";
     $notLoggedIn = "not-logged-in";
+  }
+  else
+  {
+    $user = $_SESSION['user'];
   }
 
   /*
@@ -62,7 +67,7 @@
       <div class=\"item-wrapper\">
         <div class=\"row title-upvote\">
           <div class=\"title\">#$i - $title</div>
-          <div class=\"vote-buttons-wrap\" data-claim-id=\"$claim_id\" data-user=\"" . $_SESSION['user'] . "\">
+          <div class=\"vote-buttons-wrap\" data-claim-id=\"$claim_id\" data-user=\"" . $user . "\">
             <div class=\"votes\">$totalVotes</div>
             <div class=\"vote-button upvote $upvoteSelected $notLoggedIn\" data-value=\"1\"><div class=\"count upvotes\">$upvotes</div></div>
             <div class=\"vote-button downvote $downvoteSelected $notLoggedIn\" data-value=\"-1\"><div class=\"count downvotes\">$downvotes</div></div>

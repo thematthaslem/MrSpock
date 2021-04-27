@@ -1,5 +1,9 @@
 <?php
-  $user = $_SESSION['user'];
+  if(isset($_SESSION['user']))
+  {
+    $user = $_SESSION['user'];
+  }
+
 
   /*
   Count votes

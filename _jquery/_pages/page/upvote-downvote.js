@@ -2,6 +2,13 @@
 var voteButton, voteWrap, voteCountWrap, currentVoteCount, currentSelected, totalCounter, currentTotalVote, currentTotalVoteCount;
 $(document).on('click', '.vote-button', function() {
   voteButton = $(this);
+
+  // If the voteButton has class 'not-logged-in' -> don't vote
+  if(voteButton.hasClass('not-logged-in'))
+  {
+    return;
+  }
+
   voteWrap = voteButton.closest('.vote-buttons-wrap');
   voteCountWrap = voteButton.find('.count');
   currentVoteCount = parseInt(voteCountWrap.text());

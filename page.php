@@ -340,7 +340,7 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap             
+        <!--.items-wrap              
         .item                
           .item-info               
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
