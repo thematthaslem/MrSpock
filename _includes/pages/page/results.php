@@ -151,6 +151,10 @@ $params = [
           <div class="title"><?php echo $download//substr($download,0,16); ?></div>
         </div>
       </a>
+      <a class="download-button-wrap" href="_files_dissertation/<?php echo "$handle/$downloads";?>" download>
+        <div class="download-button">Download</div>
+      </a>
+
       <?php
           }
         }
@@ -162,6 +166,9 @@ $params = [
           <img src="_pics/PDF_icon.svg"/>
           <div class="title"><?php echo $downloads; //substr($downloads,0,16); ?></div>
         </div>
+      </a>
+      <a class="download-button-wrap" href="_files_dissertation/<?php echo "$handle/$downloads";?>" download>
+        <div class="download-button">Download</div>
       </a>
       <?php
         }

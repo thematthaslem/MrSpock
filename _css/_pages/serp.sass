@@ -213,6 +213,23 @@ body.serp, body.page
                 max-width: 120px
                 word-wrap: break-word
 
+            .download-button
+              @include transition(300ms)
+              width: 140px
+              background-color: $orange
+              background-image: url('_pics/download.svg')
+              background-position: center right 10%
+              background-repeat: no-repeat
+              background-size: 10px 15px
+              border-radius: 4px
+              padding: 5px 10px
+              margin-bottom: 25px
+              font-size: 10px
+
+              &:hover
+                background-color: $primary-light
+                color: $white
+
     .pagination-wrap
       @include flex(row, center, flex-start, wrap)
       margin: 30px 0px
