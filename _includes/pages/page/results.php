@@ -144,6 +144,7 @@ $params = [
         if( is_array($downloads) )
         {
           foreach ($downloads as $download) {
+            
       ?>
       <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
         <div class="download-item">
@@ -151,7 +152,7 @@ $params = [
           <div class="title"><?php echo $download//substr($download,0,16); ?></div>
         </div>
       </a>
-      <a class="download-button-wrap" href="_files_dissertation/<?php echo "$handle/$downloads";?>" download>
+      <a class="download-button-wrap" href="_files_dissertation/<?php echo "$handle/$download";?>" download>
         <div class="download-button">Download</div>
       </a>
 
