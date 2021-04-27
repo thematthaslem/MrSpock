@@ -204,7 +204,7 @@ $params = [
     if(isset($_GET['search']))
     {
   ?>
-  <a class="go-back-button button" href="serp.php?search=<?php echo $_GET['search']; ?>&author=<?php echo $_GET['author']; ?>&department=<?php echo $_GET['department']; ?>&publisher=<?php echo $_GET['publisher']; ?>&from-date=<?php echo $_GET['from-date']; ?>&to-date=<?php echo $_GET['to-date']; ?>">< Back to Results</a>
+  <a class="go-back-button button" href="serp.php?search=<?php echo $_GET['search']; ?>&author=<?php echo $_GET['author']; ?>&department=<?php echo $_GET['department']; ?>&publisher=<?php echo $_GET['publisher']; ?>&from-date=<?php echo $_GET['from-date']; ?>&to-date=<?php echo $_GET['to-date']; ?><?php if(isset($_GET['page'])){echo '&page=' . $_GET['page'];}?>">< Back to Results</a>
   <?php
     }
   ?>
@@ -304,7 +304,7 @@ $params = [
         if( is_array($downloads) )
         {
           foreach ($downloads as $download) {
-            
+
       ?>
       <a href="_files_dissertation/<?php echo "$handle/$download";?>" target="_blank">
         <div class="download-item">
@@ -341,7 +341,7 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap               
+        <!--.items-wrap                
         .item                
           .item-info                
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
