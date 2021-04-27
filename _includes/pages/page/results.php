@@ -20,10 +20,7 @@ $params = [
   'id' => $doc_id
 ];
 
-  //print_r($params);
-  //echo '<br/><br/>';
   $response = $client->get($params);
-  //print_r($response);
 
   $data = $response['_source'];
 ?>
@@ -47,7 +44,7 @@ $params = [
     if(isset($_GET['search']))
     {
   ?>
-  <a class="go-back-button button" href="#">< Back to Results</a>
+  <a class="go-back-button button" href="serp.php?search=<?php echo $_GET['search']; ?>&author=<?php echo $_GET['author']; ?>&department=<?php echo $_GET['department']; ?>&publisher=<?php echo $_GET['publisher']; ?>&from-date=<?php echo $_GET['from-date']; ?>&to-date=<?php echo $_GET['to-date']; ?>">< Back to Results</a>
   <?php
     }
   ?>

@@ -179,10 +179,7 @@ $params = [
   'id' => $doc_id
 ];
 
-  //print_r($params);
-  //echo '<br/><br/>';
   $response = $client->get($params);
-  //print_r($response);
 
   $data = $response['_source'];
 ?>
@@ -206,7 +203,7 @@ $params = [
     if(isset($_GET['search']))
     {
   ?>
-  <a class="go-back-button button" href="#">< Back to Results</a>
+  <a class="go-back-button button" href="serp.php?search=<?php echo $_GET['search']; ?>&author=<?php echo $_GET['author']; ?>&department=<?php echo $_GET['department']; ?>&publisher=<?php echo $_GET['publisher']; ?>&from-date=<?php echo $_GET['from-date']; ?>&to-date=<?php echo $_GET['to-date']; ?>">< Back to Results</a>
   <?php
     }
   ?>
@@ -335,9 +332,9 @@ $params = [
     ?>
 </div>
 
-        <!--.items-wrap           
-        .item           
-          .item-info            
+        <!--.items-wrap            
+        .item            
+          .item-info             
             .title A Power Conditioning System for Superconductive Magnetic Energy Storage based on Multi-Level Voltage Source Converter
             .desc 
               | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
