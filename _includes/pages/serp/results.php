@@ -333,9 +333,13 @@ THIS ONE
   /*
     Build an array for each word
   */
+
   $wordWrapper = $response['suggest']['mytermsuggester'];
   // Get number of words searched
   $wordCount = count($wordWrapper);
+
+
+
 
   // Array that holds every suggestion. $suggestionsArr[0] = suggestions for first word
   $suggestionsArr[] = array();
@@ -353,9 +357,11 @@ THIS ONE
     }
 
     // Go through each suggestion for that word
+
     foreach ($suggestionWrapper as $suggestion) {
-      $suggestionsArr[$i][] = $suggestion['text'];
+        $suggestionsArr[$i][] = $suggestion['text'];
     }
+
   }
 
   // Generate possible combinations of words
@@ -383,13 +389,31 @@ THIS ONE
   $newSuggestions;
   $suggestionsArrCount = count($suggestionsArr);
 
+  // If there is only one word in the search query, it causes the loop to run forever
+  // So if there is only one word -> skip the loop and add those suggestions to $newSuggestions
+  if($suggestionsArrCount > 1)
+  {
+    $multipleWords = true;
+  }
+  else
+  {
+    $multipleWords = false;
+    // If there are suggestions (the word is mispelled -> add it to $newSuggestions)
+    if(count($suggestionsArr[0]) > 1)
+    {
+      $newSuggestions = $suggestionsArr[0];
+    }
+
+  }
+
+
   $stack = new SplQueue();
   foreach ($suggestionsArr[0] as $val) {
     $stack->enqueue($val);
   }
 
 
-  while( !( $stack->isEmpty() ) && $areSuggestions )
+  while( !( $stack->isEmpty() ) && $areSuggestions && $multipleWords)
   {
 
 
@@ -410,18 +434,7 @@ THIS ONE
         $stack->rewind();
         $top = $stack->current();
 
-        // DEBUG STUFF
-        /*
-        echo '<h2>'. $i . ' + ' . $j . '</h2>';
-        print_r($stack);
-        echo '<br/><Br/>';
 
-        var_dump($newSuggestions);
-        echo '<br/><Br/>';
-
-        echo '<h2>Top: '. $top . '</h2>';
-        echo '<br/><Br/>';
-        */
 
         if ( $top == $firstword || $stack->isEmpty())
         {
@@ -476,6 +489,7 @@ THIS ONE
 
     }
   }
+
   // DEBUG STUFF
   //var_dump($newSuggestions);
   //echo "<h2>" . $suggestionsArr[0][2] . " " . $response['suggest']['mytermsuggester'][0]['options'][0]['text'] . "</h2>"
